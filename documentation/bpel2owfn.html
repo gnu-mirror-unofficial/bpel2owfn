@@ -1,0 +1,1588 @@
+<html lang="en">
+<head>
+<title>BPEL2oWFN User's Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="BPEL2oWFN User's Manual">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="top" href="#Top">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<!--
+-->
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<h1 class="settitle">BPEL2oWFN User's Manual</h1>
+<div class="node">
+<p><hr>
+<a name="Top"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Overview">Overview</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="#dir">(dir)</a>
+<br>
+</div>
+
+<h2 class="unnumbered"><acronym>BPEL2oWFN</acronym></h2>
+
+<div class="block-image"><img src="images/bpel2owfn.png" alt="images/bpel2owfn.png"></div>
+
+<p><b>About this document:</b>
+
+   <p>This manual is for <acronym>BPEL2oWFN</acronym>, Version 1.2, a
+tool translating a web service described in <acronym>BPEL</acronym> into
+an open workflow net (<acronym>oWFN</acronym>), last updated 6 April 2006. 
+This manual does not explain how to setup or install
+<acronym>BPEL2oWFN</acronym>. For this information please read the
+Installation Manual which is part of the distribution or can be
+downloaded from the website of <acronym>BPEL2oWFN</acronym>
+(<a href="http://www2.informatik.hu-berlin.de/top/tools4bpel/bpel2owfn">http://www2.informatik.hu-berlin.de/top/tools4bpel/bpel2owfn</a>).
+
+   <p>Copyright &copy; 2005, 2006 Niels Lohmann
+
+   <p>Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+   <p><acronym>BPEL2oWFN</acronym> is licensed under the <acronym>GNU</acronym> General
+Public License.
+
+   <p>Copyright &copy; 2005, 2006 Niels Lohmann, Christian Gierds
+and Dennis Reinert.
+
+   <div class="block-image"><img src="images/tools4bpel.png" alt="images/tools4bpel.png"></div>
+
+   <p><acronym>BPEL2oWFN</acronym> is part of the Tools4<acronym>BPEL</acronym> project
+funded by the Bundesministerium f&uuml;r Bildung und Forschung. See
+<a href="http://www2.informatik.hu-berlin.de/top/tools4bpel">http://www2.informatik.hu-berlin.de/top/tools4bpel</a> for details.
+
+<!--  -->
+<ul class="menu">
+<li><a accesskey="1" href="#Overview">Overview</a>:  What <acronym>BPEL2oWFN</acronym> can do. 
+<li><a accesskey="2" href="#Invoking-BPEL2oWFN">Invoking BPEL2oWFN</a>:  How to invoke <acronym>BPEL2oWFN</acronym>. 
+<li><a accesskey="3" href="#File-Formats">File Formats</a>:  Which file formats are supported. 
+<li><a accesskey="4" href="#Petri-Net-Patterns">Petri Net Patterns</a>:  Which patterns are implemented. 
+<li><a accesskey="5" href="#Petri-Net_002drelated-Functions">Petri Net-related Functions</a>:  What is done with the Petri net. 
+<li><a accesskey="6" href="#Limitations-and-Bugs">Limitations and Bugs</a>:  What <acronym>BPEL2oWFN</acronym> cannot do. 
+<li><a accesskey="7" href="#Future-Work">Future Work</a>:  What <acronym>BPEL2oWFN</acronym> will do in the future. 
+<li><a accesskey="8" href="#References">References</a>:  Bibliography of cited literature. 
+<li><a accesskey="9" href="#GNU-General-Public-License">GNU General Public License</a>
+</ul>
+
+<!--  -->
+<div class="contents">
+<h2>Table of Contents</h2>
+<ul>
+<li><a name="toc_Top" href="#Top"><acronym>BPEL2oWFN</acronym></a>
+<li><a name="toc_Overview" href="#Overview">1 Overview</a>
+<ul>
+<li><a href="#Overview">1.1 Introduction</a>
+<li><a href="#Overview">1.2 Translation Process</a>
+<li><a href="#Overview">1.3 Concepts of <acronym>BPEL2oWFN</acronym></a>
+<ul>
+<li><a href="#Overview">1.3.1 Abstract Syntax Tree</a>
+<li><a href="#Overview">1.3.2 Pattern Repository</a>
+<li><a href="#Overview">1.3.3 Petri Net Class</a>
+<li><a href="#Overview">1.3.4 Control Flow Graph</a>
+</li></ul>
+</li></ul>
+<li><a name="toc_Invoking-BPEL2oWFN" href="#Invoking-BPEL2oWFN">2 Invoking <acronym>BPEL2oWFN</acronym></a>
+<ul>
+<li><a href="#Invoking-BPEL2oWFN">2.1 Options</a>
+<ul>
+<li><a href="#Invoking-BPEL2oWFN">2.1.1 Modes</a>
+<li><a href="#Invoking-BPEL2oWFN">2.1.2 Additional parameters</a>
+<li><a href="#Invoking-BPEL2oWFN">2.1.3 Output formats</a>
+</li></ul>
+<li><a href="#Invoking-BPEL2oWFN">2.2 Examples</a>
+<li><a href="#Invoking-BPEL2oWFN">2.3 Exit Values</a>
+</li></ul>
+<li><a name="toc_File-Formats" href="#File-Formats">3 File Formats</a>
+<ul>
+<li><a href="#File-Formats">3.1 Petri Net File Formats</a>
+<li><a href="#File-Formats">3.2 Info-files</a>
+<ul>
+<li><a href="#File-Formats">3.2.1 Naming Conventions</a>
+</li></ul>
+<li><a href="#File-Formats">3.3 Dot Graphics</a>
+</li></ul>
+<li><a name="toc_Petri-Net-Patterns" href="#Petri-Net-Patterns">4 Petri Net Patterns</a>
+<ul>
+<li><a href="#Petri-Net-Patterns">4.1 Petri net semantics from [Sta05]</a>
+<ul>
+<li><a href="#Petri-Net-Patterns">4.1.1 Overview</a>
+<li><a href="#Petri-Net-Patterns">4.1.2 Limitations of the semantics</a>
+<li><a href="#Petri-Net-Patterns">4.1.3 Changes and Modulation</a>
+</li></ul>
+</li></ul>
+<li><a name="toc_Petri-Net_002drelated-Functions" href="#Petri-Net_002drelated-Functions">5 Petri Net-related Functions</a>
+<ul>
+<li><a href="#Petri-Net_002drelated-Functions">5.1 Structural Simplification</a>
+<li><a href="#Petri-Net_002drelated-Functions">5.2 Abstractions</a>
+<li><a href="#Petri-Net_002drelated-Functions">5.3 Markings</a>
+</li></ul>
+<li><a name="toc_Limitations-and-Bugs" href="#Limitations-and-Bugs">6 Limitations and Bugs</a>
+<ul>
+<li><a href="#Limitations-and-Bugs">6.1 Known Bugs</a>
+<li><a href="#Limitations-and-Bugs">6.2 Reporting Bugs</a>
+<li><a href="#Limitations-and-Bugs">6.3 Contact Person</a>
+</li></ul>
+<li><a name="toc_Future-Work" href="#Future-Work">7 Future Work</a>
+<li><a name="toc_References" href="#References">Appendix A References</a>
+<li><a name="toc_GNU-General-Public-License" href="#GNU-General-Public-License">Appendix B <acronym>GNU</acronym> General Public License</a>
+</li></ul>
+</div>
+
+<!--  -->
+<div class="node">
+<p><hr>
+<a name="Overview"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Invoking-BPEL2oWFN">Invoking BPEL2oWFN</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="#Top">Top</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
+<br>
+</div>
+
+<h2 class="chapter">1 Overview</h2>
+
+<h3 class="section">1.1 Introduction</h3>
+
+<p><acronym>BPEL2oWFN</acronym> is a compiler translating a business processes expressed in
+<acronym title="Business Process Execution Language for Web Services">BPEL</acronym> (Business Process Execution Language for Web Services)
+[ACD^+03] into an <acronym title="open Workflow Net">oWFN</acronym> (open Workflow Net) [MRS05]. 
+This <acronym title="open Workflow Net">oWFN</acronym> can be used to:
+
+     <ul>
+<li>check controllability [Mar03, Wei04] with Fiona [Fiona],
+<li>generate the operating guidelines [MRS05] with Fiona [Fiona],
+<li>check for deadlocks, or
+<li>check any temporal logic formula with several model checking tools [LoLA, MCK]. 
+</ul>
+
+<p><acronym>BPEL2oWFN</acronym> uses static analysis to make the generated <acronym title="open Workflow Net">oWFN</acronym>
+as compact as possible to analyze a chosen property. This is called
+<i>flexible model generation</i> (see <a href="#Future-Work">Future Work</a>).
+
+<p><acronym>BPEL2oWFN</acronym> is the successor from <acronym>BPEL2PN</acronym> [SHS05], a
+Java-based compiler generating low-level Petri nets. <acronym>BPEL2oWFN</acronym> can be
+understood as a re-implementation for extensibility and performance issues. Its
+functionality is a superset of the functionality of <acronym>BPEL2PN</acronym>. 
+<a rel="footnote" href="#fn-1" name="fnd-1"><sup>1</sup></a>
+
+<p><acronym>BPEL2oWFN</acronym> was written by Niels Lohmann, Christian Gierds
+and Dennis Reinert. It is part of the Tools4<acronym title="Business Process Execution Language for Web Services">BPEL</acronym> project
+funded by the German Bundesministerium f&uuml;r Bildung und Forschung. See
+<a href="http://www2.informatik.hu-berlin.de/top/tools4bpel">http://www2.informatik.hu-berlin.de/top/tools4bpel</a> for details.
+
+<h3 class="section">1.2 Translation Process</h3>
+
+<p>The translation process of the <acronym title="Business Process Execution Language for Web Services">BPEL</acronym> business process is performed in
+six steps which we describe briefly in this section:
+
+     <ol type=1 start=1>
+<li><b>Lexical and syntactical analysis</b>. <acronym>BPEL2oWFN</acronym> parses the
+input process according to the specification of <acronym>BPEL4WS</acronym> version 1.1
+[ACD^+03]. All information about the process is collected in a symbol
+table for further use.
+
+     <li><b>Semantic analysis</b>. The input file is checked against the constraints
+of the specification, e.g. that each defined link has to be used as source and
+target exactly once. <acronym title="Business Process Execution Language for Web Services">BPEL</acronym> processes violating these constraints are
+rejected.
+
+     <li><b><acronym>AST</acronym> generation</b>. For further analysis steps the exact syntax
+(indentation etc.) is not used any more. The input process is represented as
+an <acronym title="abstract syntax tree">AST</acronym> (abstract syntax tree). While generating the <acronym title="abstract syntax tree">AST</acronym>, the
+implicit transformation rules of <acronym title="Business Process Execution Language for Web Services">BPEL</acronym> (e.g. the presence of an
+<span class="samp">otherwise</span>-branch with an empty activity) are applied.
+
+     <li><b>Net generation</b>. The nodes of the <acronym title="abstract syntax tree">AST</acronym> are used to create
+the Petri net using the pattern database by applying `unparse'-rules (rules
+associating each node with a pattern).
+
+     <li><b>Net optimization</b> (optional). To reduce the generated net several
+structural reduction rules can be applied, e.g. to merge sequences.
+
+     <li><b>Net output</b>. The generated Petri net can be exported in several file
+formats.
+     </ol>
+
+<h3 class="section">1.3 Concepts of <acronym>BPEL2oWFN</acronym></h3>
+
+<p>In this section we describe the main concepts of <acronym>BPEL2oWFN</acronym> used to
+realize the translation. Reading this section is not necessary for using
+<acronym>BPEL2oWFN</acronym>, yet knowing the underlying algorithms and data structures
+not only helps to locate bugs, but also helps you to customize
+<acronym>BPEL2oWFN</acronym> or request a feature.
+
+<p><a name="Abstract-Syntax-Tree"></a>
+
+<h4 class="subsection">1.3.1 Abstract Syntax Tree</h4>
+
+<p>The <acronym title="abstract syntax tree">AST</acronym> (abstract syntax tree) is an abstraction of the
+syntax tree generated while parsing the <acronym title="Business Process Execution Language for Web Services">BPEL</acronym> process: any
+unnecessary information (e.g. indention, brackets or other
+&ldquo;syntax-supporting&rdquo; elements) is omitted. It is the central data
+structure of <acronym>BPEL2oWFN</acronym>. The nodes of the <acronym title="abstract syntax tree">AST</acronym> are
+annotated with pointers to symbol table entries during the analysis steps. 
+These annotations are used to select the most compact Petri net pattern
+from the pattern database to check a given property.
+
+<p><a name="Pattern-Repository"></a>
+
+<h4 class="subsection">1.3.2 Pattern Repository</h4>
+
+<p>The idea of flexible model generation is to find the most compact
+model to check a given property. The patterns of the Petri net
+semantics of [Sta05] are designed to fit in any given context. 
+However when the context is known some behavior modeled in the
+patterns (i.e. some of the nodes) can be safely removed without
+changing its semantics. <acronym>BPEL2oWFN</acronym> is designed to hold
+several sets of Petri net patterns each suitable in certain
+contexts. These patterns are collected in a pattern repository.
+
+<p><a name="Petri-Net-Class"></a>
+
+<h4 class="subsection">1.3.3 Petri Net Class</h4>
+
+<p><acronym>BPEL2oWFN</acronym> provides many algorithms and data structures to
+build, represent, modify and simplify Petri nets and open workflow
+nets, resp. They are the interface between the pattern database and
+the file output for the model checking tool. The functions are
+collected in an extensible class allowing to add more output file
+formats, structural simplification rules (optimized to preserve certain
+properties such as deadlock freedom or liveness) or abstractions
+(e.g. abstraction from variables, abstraction from external behavior).
+
+<p><a name="Control-Flow-Graph"></a>
+
+<h4 class="subsection">1.3.4 Control Flow Graph</h4>
+
+<p>Beside the dynamic analysis of the generated Petri net model with Fiona
+or classical model checking tools, <acronym>BPEL2oWFN</acronym> prototypically
+implements a control flow graph (<acronym>CFG</acronym>) (c.f. [Hei03]). This <acronym>CFG</acronym> can
+be used to check most of the constraints of the specification statically,
+i.e. without actually deploying and running the BPEL process. For example,
+the <acronym>CFG</acronym> can be used to check if each variable is initialized by an
+incoming message or an <code>&lt;assign&gt;</code> activity.
+
+<!--  -->
+<div class="node">
+<p><hr>
+<a name="Invoking-BPEL2oWFN"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#File-Formats">File Formats</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="#Overview">Overview</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
+<br>
+</div>
+
+<h2 class="chapter">2 Invoking <acronym>BPEL2oWFN</acronym></h2>
+
+<p>The standard invocation of <acronym>BPEL2oWFN</acronym> is:
+
+<pre class="example">     bpel2owfn -i inputfile.bpel -f owfn -o
+</pre>
+<p>where <span class="file">inputfile.bpel</span> is a <acronym title="Business Process Execution Language for Web Services">BPEL</acronym> process. The option
+<span class="samp">-f owfn</span> cause <acronym>BPEL2oWFN</acronym> to generate an open workflow net. This
+net is written to a file named <span class="file">inputfile.owfn</span>, because of the option
+<span class="samp">-o</span>. For more examples, see <a href="#Examples">Examples</a>.
+
+<p><acronym>BPEL2oWFN</acronym> can be called without any parameter. In this case, it acts
+as a simple parser for <acronym title="Business Process Execution Language for Web Services">BPEL</acronym>, that reads its input from the standard input
+(<code>stdin</code>).
+
+<h3 class="section">2.1 Options</h3>
+
+<p><acronym>BPEL2oWFN</acronym> supports the following command-line options:
+
+     <dl>
+<dt><span class="samp">--help</span><dt><span class="samp">-h</span><dd>Print an overview of the command-line options and exit.
+
+     <br><dt><span class="samp">--version</span><dt><span class="samp">-v</span><dd>Print version information and exit.
+
+     <br><dt><span class="samp">--input=</span><var>filename</var><span class="samp">.bpel</span><dt><span class="samp">-i </span><var>filename</var><span class="samp">.bpel</span><dd>Read <acronym title="Business Process Execution Language for Web Services">BPEL</acronym> input from file <var>filename</var><span class="file">.bpel</span>. 
+If this parameter is omitted, input is read from standard input (<code>stdin</code>).
+
+     <br><dt><span class="samp">--output[=</span><var>filename</var><span class="samp">]</span><dt><span class="samp">-o</span><dd>The generated files are written to a file called <var>filename</var>. If the short
+form is used or the <var>filename</var> is omitted, the input file name is taken and
+extended by the suffix of the chosen file format(s). If this parameter is
+omitted, the output is passed to the standard output (<code>stdout</code>).
+
+     <br><dt><span class="samp">--log[=</span><var>filename</var><span class="samp">]</span><dt><span class="samp">-l</span><dd>All additional information like warnings and processing information
+are written to a file called <var>filename</var>. If the short form is used
+or the <var>filename</var> is omitted, the output file name is taken and
+extended by the suffix <span class="samp">.log</span>. If this parameter is omitted, the
+information is passed to the standard error output (<code>stderr</code>).
+
+     <br><dt><span class="samp">--debug=1-4 | flex | bison</span><dt><span class="samp">-d 1-4 | flex | bison</span><dd>This option triggers different debug levels, and can enable additional
+information from Flex and Bison about how the input is lexed and parsed.
+
+     <br><dt><span class="samp">--bpel2pn</span><dd>This option makes <acronym>BPEL2oWFN</acronym> behave like its predecessor,
+<acronym>BPEL2PN</acronym>: it generates a Petri net <acronym>LoLA</acronym> format and an
+information file. The option <span class="samp">--bpel2pn</span> is a shortcut for
+<span class="samp">--mode=petrinet --format=lola --format=info --output</span>. 
+</dl>
+
+<h4 class="subsection">2.1.1 Modes</h4>
+
+<p>When invoking <acronym>BPEL2oWFN</acronym> several modes are possible.
+
+     <dl>
+<dt><span class="samp">--mode=</span><var>modus</var><dt><span class="samp">-m </span><var>modus</var><dd>
+<acronym>BPEL2oWFN</acronym> supports four different modes for handling
+<acronym title="Business Process Execution Language for Web Services">BPEL</acronym>, so <var>modus</var> can be one of the following options:
+
+          <dl>
+<dt><span class="samp">ast</span><dd>Outputs the <acronym title="abstract syntax tree">AST</acronym> (abstract syntax tree) generated while
+parsing the input file to standard output. This option is mostly
+used for debugging reasons since it shows the implicit transformations
+and the phylum names used when generating the Petri net.
+
+          <br><dt><span class="samp">cfg</span><dd>For control flow analysis (a form of static analysis) a <acronym title="Control
+Flow Graph">CFG</acronym> (Control
+Flow Graph) is generated. It can be printed in graphical (dot)
+representation. This option is in an early beta-stage and can only check
+for uninitialzed variables yet. For more information, see <a href="#Future-Work">Future Work</a>.
+
+          <br><dt><span class="samp">petrinet</span><dd>Generates a Petri net representing the semantics of the given
+process. Other options can be added to simplify or modify that generated Petri
+net (see below).
+
+          <br><dt><span class="samp">pretty</span><dd>Outputs the parsed <acronym title="Business Process Execution Language for Web Services">BPEL</acronym> file in <acronym>XML</acronym> representation. Any
+unnecessary attributes are omitted. This option is mostly used for debugging
+reasons as it shows the implicit transformations and the identifiers of the
+<acronym title="Business Process Execution Language for Web Services">BPEL</acronym> constructs. 
+</dl>
+     </dl>
+Please note that you can only use at most one mode.
+
+<h4 class="subsection">2.1.2 Additional parameters</h4>
+
+<p>These options control some Petri net-related options. See <a href="#Petri-Net_002drelated-Functions">Petri Net-related Functions</a> for more details.
+
+     <dl>
+<dt><span class="samp">--parameter=</span><var>par</var><dt><span class="samp">-p </span><var>par</var><dd>
+          <dl>
+<dt><span class="samp">cycliceh</span><dd>When the parameter is set, the pattern for the message event handler is
+cyclic as depicted in Fig. 30/31 of [Sta05]. If the parameter is not set
+(standard case), the pattern is acyclic: the activity embedded in the
+event handler is executed at most once, depended on the incoming messages.
+
+          <br><dt><span class="samp">cyclicwhile</span><dd>When the parameter is set, the pattern for the <code>&lt;while&gt;</code> activity is
+cyclic as depicted in Fig. 18 of [Sta05]. If the parameter is not set
+(standard case), the pattern is acyclic: the activity embedded in the
+<code>&lt;while&gt;</code> activity is at most executed once, chosen non-deterministically.
+
+          <br><dt><span class="samp">finalloop</span><dd>Add an extra loop transition to the final place of the generated Petri net to
+live-lock the system in order to find deadlocks.
+
+          <br><dt><span class="samp">nofhfaults</span><dd>With this parameter, standard faults may not occure in activities directly nested
+in a fault handler.
+
+          <br><dt><span class="samp">nostandardfaults</span><dd>When the parameter is set, only used-defined faults using the <code>&lt;throw&gt;</code>
+activity can occur.
+
+          <br><dt><span class="samp">novariables</span><dd>Removes places of the generated Petri net modelling variables as well as the
+place modelling the system clock.
+
+          <br><dt><span class="samp">simplify</span><dd>Structurally simplify the generated Petri net. 
+</dl>
+     </dl>
+
+<p>If you want to enable more than one parameter you have to add <span class="samp">-p</span>/
+<span class="samp">--parameter</span> to each parameter.
+
+<h4 class="subsection">2.1.3 Output formats</h4>
+
+<p>Especially for the Petri net mode, a variaty of output formats are supported,
+see <a href="#File-Formats">File Formats</a> for more information. There are invoked by the
+following option:
+
+     <dl>
+<dt><span class="samp">--format=</span><var>fileformat</var><dt><span class="samp">-f </span><var>fileformat</var><dd>
+          <dl>
+<dt><span class="samp">apnn</span><dd>Create a Petri net in <acronym title="Abstract Petri Net Notation">APNN</acronym> (Abstract Petri Net Notation). Implies the
+mode <span class="samp">petrinet</span>.
+
+          <br><dt><span class="samp">dot</span><dd>Create a dot representation of the structure generated in the current mode
+which can be any kind of Petri net (mode <span class="samp">petrinet</span> or the control flow
+graph (mode <span class="samp">cfg</span>).
+
+          <br><dt><span class="samp">info</span><dd>Create an additional information file. Implies the mode <span class="samp">petrinet</span>.
+
+          <br><dt><span class="samp">lola</span><dd>Create a <acronym>LoLA</acronym> place/transition net. Implies the mode <code>petrinet</code>.
+
+          <br><dt><span class="samp">owfn</span><dd>Create a low-level <acronym title="open Workflow Net">oWFN</acronym> in Fiona file format. Implies the
+mode <span class="samp">petrinet</span>.
+
+          <br><dt><span class="samp">pep</span><dd>Create a Petri net in low-level <acronym>PEP</acronym> notation. Implies the mode
+<span class="samp">petrinet</span>.
+
+          <br><dt><span class="samp">pnml</span><dd>Create a <acronym>PNML</acronym> Petri net. Implies the mode <span class="samp">petrinet</span>.
+
+          <br><dt><span class="samp">xml</span><dd>Create an <acronym title="Extensible Markup Lanuage">XML</acronym> (Extensible Markup Lanuage) file. Implies the mode
+<code>pretty</code>. 
+</dl>
+     </dl>
+
+<p>If you want to use more than one output file format you have to add <span class="samp">-f</span>/
+<span class="samp">--fileformat</span> to each file format. Please note that the underlying modes
+of the given file formats are the same, i.e. you cannot create <acronym title="Extensible Markup Lanuage">XML</acronym> and
+<acronym>LoLA</acronym> files together since <acronym title="Extensible Markup Lanuage">XML</acronym> uses the mode <span class="samp">pretty</span>
+whereas <acronym>LoLA</acronym> uses the mode <span class="samp">petrinet</span>.
+
+<p><a name="Examples"></a>
+
+<h3 class="section">2.2 Examples</h3>
+
+<p>In this section we show some examples how <acronym>BPEL2oWFN</acronym> can be
+invoked.
+
+     <dl>
+<dt><span class="samp">bpel2owfn -i sample.bpel -flola -finfo -o -p simplify</span><dd>
+Reads the file <span class="file">sample.bpel</span>, generates a structural simplified
+low-level Petri net and saves it in a <acronym>LoLA</acronym> file
+<span class="file">sample.lola</span>. For further information a file
+<span class="file">sample.info</span> is generated.
+
+     <br><dt><span class="samp">bpel2owfn -i sample.bpel -fowfn -d3 -o</span><dd>
+Reads the file <span class="file">sample.bpel</span>, generates a low-level open
+workflow net and saves it in an <acronym title="open Workflow Net">oWFN</acronym> file
+<span class="file">sample.owfn</span>. For further information a file
+<span class="file">sample.info</span> is generated. During the conversion several debug
+messages are printed to standard output.
+
+     <br><dt><var>prog</var><span class="samp"> | bpel2owfn -fdot -m petrinet | dot -Tpng -osample.png</span><dd>
+Runs the program <var>prog</var> and reads its output as <acronym title="Business Process Execution Language for Web Services">BPEL</acronym>
+process, generates a Petri net and outputs its Dot representation. 
+This stream is read by Dot which layouts the Petri net and creates an output
+<acronym title="Portable Network Graphic">PNG</acronym> (Portable Network Graphic) file <span class="file">sample.png</span>.
+
+     <br><dt><span class="samp">bpel2owfn -i sample.bpel -m ast</span><dd>
+Reads the file <span class="file">sample.bpel</span> and prints the abstract syntax tree
+(<acronym title="abstract syntax tree">AST</acronym>) to standard output. 
+</dl>
+
+<h3 class="section">2.3 Exit Values</h3>
+
+<p>When <acronym>BPEL2oWFN</acronym> is invoked and run without any error, the
+exit value is 0.
+
+     <dl>
+<dt>0<dd><b>No error.</b> The input file could be correctly opened, parsed and
+the output file(s) could be generated without any error.
+
+     <br><dt>1<dd><b>Lexical or syntax error.</b> This error occurs while lexing or
+parsing the input file. It is thrown by the lexer or the parser,
+resp. Usually the `source' of the error (i.e. the filename and line
+number) is indicated together with the unexpected (last read) and
+expected token.
+
+     <p>An example:
+<p><table class="cartouche" summary="cartouche" border="1"><tr><td>
+     <pre class="smallexample">          Error while parsing
+          
+          syntax error, unexpected X_SLASH, expecting X_OPEN
+          Error in `example.bpel' in line 12:
+            token/text last read was `/'
+     </pre>
+     </td></tr></table>
+
+     <p>Please note that the indicated position (i.e. the line number) may
+be fuzzy &mdash; it should be understood as a hint to the erroneous
+line.
+
+     <br><dt>2<dd><b>`File not found' exception.</b> The given input file was not found
+resp. could not be opened.
+
+     <p>An example:
+<p><table class="cartouche" summary="cartouche" border="1"><tr><td>
+     <pre class="smallexample">          An error has occurred while parsing "example.bpel"!
+          
+          Exception #2 occurred!
+          
+             File `example.bpel' not found.
+     </pre>
+     </td></tr></table>
+
+     <br><dt>3<dd><b>`File could not be opened' exception.</b> An output file could not be opened
+for write access. You may check the appropriate for the target directory or the
+file if it already exists.
+
+     <p>An example:
+<p><table class="cartouche" summary="cartouche" border="1"><tr><td>
+     <pre class="smallexample">          An error has occured while parsing "example.bpel"!
+          
+          Exception #3 occured!
+          
+             File "example.dot" could not be opened for writing access!
+     </pre>
+     </td></tr></table>
+
+     <br><dt>10<dd><b>Option mismatch.</b> The given command-line options cannot be
+processed together.
+
+     <p>An example:
+<p><table class="cartouche" summary="cartouche" border="1"><tr><td>
+     <pre class="smallexample">          An error has occurred while parsing "example.bpel"!
+          An error has occured while parsing "&lt;STDIN&gt;"!
+          
+          Exception #10 occured!
+          
+             Choose only one mode
+          
+           Additional information:
+             Type ./bpel2owfn -h for more information.
+     </pre>
+     </td></tr></table>
+
+     <br><dt>30<dd><b>`Dynamic cast error' exception.</b> While building an internal scope
+tree an unexpected error has occurred.
+
+     <br><dt>40<dd><b>Node not found.</b>
+
+     <br><dt>41<dd><b>`Node already defined' exception.</b> While generating the Petri net
+a node was found having a history entry covered by another node
+before.
+
+     <p>An example:
+<p><table class="cartouche" summary="cartouche" border="1"><tr><td>
+     <pre class="smallexample">          An error has occurred while parsing "example.bpel"!
+          
+          Exception #41 occurred!
+          
+             Place with role `1.internal.final' already defined.
+     </pre>
+     </td></tr></table>
+
+     <br><dt>42<dd><b>`Merging error' exception.</b> While generating the Petri net an
+error occurred while merging two nodes. It happens either when one
+of the nodes was not found or one of the nodes is a guarded
+transition&mdash;the merging of guarded transitions is not yet
+supported.
+
+     <br><dt>43<dd><b>`Arc error' exception.</b> While generating the Petri net an error
+occurred while adding an arc to the net. It happens either on type
+errors &mdash; i.e. an arc between two transitions (or two places, resp.) 
+should be drawn &mdash; or when the source or target node of an arc was
+not found. 
+</dl>
+
+<p>Please report the occurrence of any exception with numbers 30&ndash;50
+since it indicates a bug in <acronym>BPEL2oWFN</acronym> we would like to fix
+immediately (see <a href="#Reporting-Bugs">Reporting Bugs</a>).
+
+<!--  -->
+<div class="node">
+<p><hr>
+<a name="File-Formats"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Petri-Net-Patterns">Petri Net Patterns</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="#Invoking-BPEL2oWFN">Invoking BPEL2oWFN</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
+<br>
+</div>
+
+<h2 class="chapter">3 File Formats</h2>
+
+<p><acronym>BPEL2oWFN</acronym> can generate several file formats:
+
+<h3 class="section">3.1 Petri Net File Formats</h3>
+
+<p>These file formats output the generated Petri net model to various Petri net
+file formats to support as much model checking and analysis tools as possible. 
+The nodes of the Petri net are named using the internal (numeric) names
+generated by <acronym>BPEL2oWFN</acronym>. For more information on the node naming
+conventions of <acronym>BPEL2oWFN</acronym>, see <a href="#Naming-Conventions">Naming Conventions</a>.
+
+<p>In all file formats, the inital place of the process, the process clock and all
+variable places are initially marked.
+
+     <dl>
+<dt><b><acronym>LoLA</acronym> place/transition net</b><dd>
+A (low-level) place/transition net as described in [LoLA]. 
+The first entry of the history of each node is added as a comment.
+
+     <br><dt><b><acronym title="open Workflow Net">oWFN</acronym> in Fiona format</b><dd>
+An open workflow net is a Petri net with an <i>interface</i>, i.e. two sets of
+places: <i>input places</i> and <i>output places</i>. Additionally an open workflow
+net has a set of final markings. To represent <acronym title="open Workflow Net">oWFN</acronym>s
+the <acronym>LoLA</acronym> format was extended to implement this categorization.
+
+     <br><dt><b>Petri Net Markup Language (<acronym>PNML</acronym>)</b><dd>A (low-level) place/transition net in Petri Net Markup Language as described
+in [WK02]. An <var>arcname</var> value is just added to meet the
+syntactic requirements and is just an enumeration of the arcs (<span class="samp">a1</span>,
+<span class="samp">a2</span>, <small class="dots">...</small>).
+
+     <br><dt><b>Abstract Petri Net Notation (<acronym title="Abstract Petri Net Notation">APNN</acronym>)</b><dd>
+A (low-level) place/transition net in Abstract Petri Net Notation as described
+in [BKK95]. An <var>arcname</var> value is just added to meet the
+syntactic requirements and is just an enumeration of the arcs (<span class="samp">a1</span>,
+<span class="samp">a2</span>, <small class="dots">...</small>).
+
+     <br><dt><b>Low-level <acronym>PEP</acronym> Notation</b><dd>
+A (low-level) place/transition net in low-level <acronym title="Programming
+Environment based on Petri Nets">PEP</acronym> (Programming
+Environment based on Petri Nets) notation as described in [PEP].
+
+</dl>
+
+<h3 class="section">3.2 Info-files</h3>
+
+<p>The Info-files are generated when any command-line option is used which imply
+Petri net-generation. When reading from a file <span class="file">process.bpel</span> a file
+<span class="file">process.info</span> is generated. This file sums up all places and transitions
+together with their internal (numeric) name and their complete history:
+
+<p><table class="cartouche" summary="cartouche" border="1"><tr><td>
+<pre class="smallexample">     PLACES:
+     ID  TYPE        ROLES
+     <var>a list of places</var>
+     
+     TRANSITIONS:
+     ID      ROLES
+     <var>a list of transitions</var>
+</pre>
+</td></tr></table>
+
+<p>These files are generated to document the connection between the generated
+output file and the chosen Petri net patterns. In future distributions of
+<acronym>BPEL2oWFN</acronym> the Info-files will be used to annotate witness and
+counter-example paths, resp. and to &ldquo;re-translate&rdquo; Petri net properties
+(e.g. a dead transition) to the input <acronym title="Business Process Execution Language for Web Services">BPEL</acronym> process.
+
+<p><a name="Naming-Conventions"></a>
+
+<h4 class="subsection">3.2.1 Naming Conventions</h4>
+
+<p><acronym>BPEL2oWFN</acronym> generates the output Petri net by creating and
+merging parameterized patterns of the Petri net semantics defined in
+[Sta05]. Due to merging and simplifying the Petri net nodes
+&ldquo;belong&rdquo; to more than one pattern. For example, in a sequence the
+initial place of the sequence and the initial place of its first
+activity are merged so that the final Petri net contains one place
+with two <i>roles</i>.
+
+<p>The roles of each place are collected during the Petri net
+generation. They form the <i>history</i> of the node. It is used to
+locate errors of the modeled business process: If, for example,
+<acronym>BPEL2oWFN</acronym> generates a Petri net of a business process and
+the model checker <acronym>LoLA</acronym> finds a dead transition, its
+history helps to find which <acronym title="Business Process Execution Language for Web Services">BPEL</acronym> constructs are affected
+and in this case will never be executed.
+
+<p>The roles are named using the following conventions:
+
+     <ul>
+<li>Each <acronym title="Business Process Execution Language for Web Services">BPEL</acronym> activity has been assigned an identifier during the
+syntactic analysis of the input process. Each node added to the Petri net
+from the Petri net pattern of that activity begins with that identifier.
+
+     <p>For example, <acronym title="Business Process Execution Language for Web Services">BPEL</acronym>'s activity process has the identifier <span class="samp">1</span>,
+so that all nodes of the process pattern begin with <span class="samp">1.</span>. To find out the
+identifiers of a given process use the <span class="samp">--xml</span> command-line option which
+prints the id of each activity as an <acronym title="Extensible Markup Lanuage">XML</acronym> attribute.
+
+     <li>In most cases each <acronym title="Business Process Execution Language for Web Services">BPEL</acronym> activity can be source or target of
+links. The semantics defined in [Sta05] organizes this link concept by several
+wrappers. For an activity with the identifier <var>id</var> the nodes of the wrapper
+begin with <var>id</var><span class="samp">.</span> whereas the nodes of the actual activity begin
+with <var>id</var><span class="samp">.internal.</span>.
+
+     <li>The roles of nodes of the stop pattern of a process or scope with
+identifier <var>id</var> begin with <var>id</var><span class="samp">.internal.stop.</span>.
+
+     <p>The same schema is used for fault handlers
+(<var>id</var><span class="samp">.internal.faultHandler.</span>), compensation handlers
+(<var>id</var><span class="samp">.internal.compensationHandler.</span>) and event handlers
+(<var>id</var><span class="samp">.internal.eventHandler.</span>), resp.
+
+     <li>Labels (e.g. <span class="samp">initial</span>) in a figure of [Sta05] are appended to the
+id string (e.g. <var>id</var><span class="samp">.internal.initial</span>). If both numeric (e.g. 
+<span class="samp">p1</span>) and textual (e.g. <span class="samp">initial</span>) labels are depicted in a figure,
+the latter is used.
+
+     <li>The labels of fault-throwing transitions also contain the last place of
+the positive control flow: If, for example, a reply activity throws a fault,
+the fault-throwing transition reads from the place labeled
+<var>id</var><span class="samp">.internal.running</span> and is labeled
+<var>id</var><span class="samp">.internal.throwFault.running</span>.
+
+     <li>In parameterized patterns (e.g. an assign activity or all structured
+activities) the labels of the figures of [Sta05] are trailed by an numeration
+(e.g. <var>id</var><span class="samp">.internal.copy.</span><var>number</var><span class="samp">.running</span>).
+
+</ul>
+
+<h3 class="section">3.3 Dot Graphics</h3>
+
+<p>To bugfix<a rel="footnote" href="#fn-2" name="fnd-2"><sup>2</sup></a> the implemented Petri net patterns
+<acronym>BPEL2oWFN</acronym> implements a graph representation of the generate Petri
+net. Furthermore, the <acronym title="Control
+Flow Graph">CFG</acronym> can be printed as dot output.
+
+<!--  -->
+<div class="node">
+<p><hr>
+<a name="Petri-Net-Patterns"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Petri-Net_002drelated-Functions">Petri Net-related Functions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="#File-Formats">File Formats</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
+<br>
+</div>
+
+<h2 class="chapter">4 Petri Net Patterns</h2>
+
+<p>In version 1.2 of <acronym>BPEL2oWFN</acronym> the following Petri net
+patterns are implemented:
+
+<h3 class="section">4.1 Petri net semantics from [Sta05]</h3>
+
+<p>The Petri net semantics for <acronym>BPEL4WS</acronym> from Christian Stahl
+(Humboldt-Universit&auml;t zu Berlin) published in [Sta05].
+
+<h4 class="subsection">4.1.1 Overview</h4>
+
+<p>Feature complete semantics covering both positive control flow with
+event handling and negative control flow (fault and compensation
+handling).
+
+<p><a name="Limitations-of-the-semantics"></a>
+
+<h4 class="subsection">4.1.2 Limitations of the semantics</h4>
+
+     <ul>
+<li>Only one instance of a <acronym title="Business Process Execution Language for Web Services">BPEL</acronym> process can be
+transformed into a Petri net.
+
+     <li>The semantics abstracts from the connection of a
+<acronym title="Business Process Execution Language for Web Services">BPEL</acronym> process to its partner processes. The interface of a
+<acronym title="Business Process Execution Language for Web Services">BPEL</acronym> process is transformed into a set of message
+channels, i.e. places in the Petri net.
+
+     <li>In our Petri net patterns we model data, but we abstract from
+the definition of the functions which edit the data. Furthermore, we
+did not specify the transition guards and so we did not specify
+which circumstances are necessary that a specific fault can occur.
+
+     <li>Every activity is limited to one correlation set (except the
+synchronous invoke which is limited to two correlation sets).
+
+</ul>
+
+<p><a name="Changes-and-Modulation"></a>
+
+<h4 class="subsection">4.1.3 Changes and Modulation</h4>
+
+<p>We tried to stick as close to the Petri net patterns of [Sta05] as
+possible. However, the implemented patterns in the pattern database
+sometimes differ to the given patterns due to discovery of bugs or
+implementation decisions. In this subsection we sum up these changes
+to help you understand the generated Petri net model.
+
+     <ul>
+<li><b>Fault model</b>. At most one error can occur in the positive
+control flow of each scope or process. Yet this confines the
+possible runs of the process it is only a little change of the
+semantics, since &mdash; according to the specification &mdash; only the
+first fault is handled anyway. While further faults occurring before
+the positive control flow is stopped are ignored in the original
+semantics of [Sta05] (in fact, the faults are collected on place
+<span class="samp">fault_in</span> and then consumed by a reset arc) they are prevented
+in the implemented semantics. In our model, exactly the <i>first</i>
+occurring fault is handled, whereas in [Sta05] one fault is chosen
+non-deterministically.
+
+     <p>Furthermore, all <span class="samp">failed</span> places of the activities were
+removed. In the original Petri net semantics, all faults of a scope
+were collected on the <span class="samp">fault_in</span> of the stop-pattern and then
+classified as being the first fault of the scope, a following fault,
+a fault from the fault handler, a fault from the compensation
+handler, or a fault from a child scope. In our implementation, new
+places (<span class="samp">fh_fault_in</span> and <span class="samp">ch_fault_in</span>) were introduced
+and each activity throws its faults to the &ldquo;correct&rdquo; place
+automatically.
+
+     <p>To ensure that at most one error can occur (i.e. at most one token
+is produced on any fault place) the fault places are guarded by
+state places: To throw a fault from an activity enclosed in a scope,
+the state of that scope has to be <span class="samp">Active</span>. The first thrown
+fault changes the state to <span class="samp">!Active</span> thus preventing more
+faults to occur. The places <span class="samp">fh_fault_in</span> and
+<span class="samp">ch_fault_in</span>, resp. are guarded by
+<span class="samp">!FHFaulted</span>/<span class="samp">FHFaulted</span> and
+<span class="samp">!CHFaulted</span>/<span class="samp">CHFaulted</span>, resp.
+
+     <p>Moreover, the generated Petri nets have less nodes than those
+generated by <acronym>BPEL2PN</acronym> [SHS05] since an unfolding of the
+reset arcs in not necessary any more.
+
+     <li><b>Standard faults</b>. The &ldquo;throw-fault&rdquo; and &ldquo;stop&rdquo; transitions
+are generated using parametrized functions. With the command-line parameter
+<span class="samp">--parameter=nostandardfaults</span> all <acronym title="Business Process Execution Language for Web Services">BPEL</acronym> standard faults
+that can occur in the activites (i.e. all faults except user-defined faults
+in a throw activity or join failures) are suppressed. The generated models
+have a smaller state space and allow the analysis for controllability
+which is impossible without the assumption that messages can always be
+sent faultlessly.
+
+     <p>In order not to suppress standard faults at all, the command-line parameter
+<span class="samp">--parameter=nofhfaults</span> can be used to allow standard faults outside
+fault handlers, i.e. to create models that allow the occurrence of one
+standard fault in each scope yet disallow to occurrence of further faults.
+
+     <li><b>1-safety</b>. The new modeling of the fault management yields
+to 1-safe Petri nets (i.e. any reachable state of the Petri net
+model puts at most one token on each place of the net).
+
+     <p>Beside performance (e.g. only 1 bit is needed to store the marking
+of a place) and compatibility issues (e.g. 1-safety is a
+prerequisite to use the Model-Checking Kit [MCK]), features not
+supported by the Petri net semantics can be discovered since the
+generated net will most likely violate 1-safety when an unsupported
+<acronym title="Business Process Execution Language for Web Services">BPEL</acronym> feature is used. If, for example, a scope is enclosed
+in a while loop (which would model instantiation which is not
+supported by the Petri net semantics <a href="#Limitations-of-the-semantics">Limitations of the semantics</a>), the state places of that scope would not be 1-safe.
+
+     <li><b>Assign activity</b>. All copy branches of an assign activity
+are modeled in a single pattern (i.e. Fig. 6 and Fig. 7 are merged). 
+Furthermore, when an error (outside that activity) occurs, an active
+assign-activity is not stopped until all copy branches have
+finished. This is described in [ACD^+03] as:
+
+     <blockquote>
+The assign activities are sufficiently short-lived that they are allowed to
+complete rather than being interrupted when termination is forced. 
+</blockquote>
+
+     <p>This change fixes a bug in the Petri net semantics.
+
+     <li><b>While activity</b>. Since the original semantics does not support
+instances of the BPEL process, while activities were poorly supported and
+usually produced non 1-safe Petri nets or deadlocks as links embedded in
+the while activity were evaluated incorrectly. In the implementation the
+while activity is acyclic: the embedded activity is now executed at most
+once (whether or not it is executed is decided non-deterministically).
+
+     <p>The &ldquo;original&rdquo; behavior can be restored with the command-line parameter
+<span class="samp">--parameter=cyclicwhile</span>.
+
+     <li><b>Event handlers</b>. There is one pattern for both alarm and
+message event handlers (i.e. Fig. 29 and Fig. 30 are merged). When
+no event handler is specified, an &ldquo;implicit&rdquo; event handler is
+installed which is just a stub and does not change the semantics. The
+message event handlers are acyclic by default to create acyclic Petri net
+models. However, the &ldquo;original&rdquo; behavior can be restored with the
+command-line parameter <span class="samp">--parameter=cycliceh</span>.
+
+     <li><b>Deadlocks</b>. A transition named <span class="samp">1.internal.finalloop</span>
+can be added to livelock the process upon completion using the command-line
+parameter <span class="samp">--parameter=finalloop</span>. This leads to
+deadlock-free Petri nets in case of processes with &ldquo;reasonable&rdquo;
+control flow and helps to find unwanted deadlocks occurring due
+wrong modeling. If, for example, the links of a process model are
+cyclic the generated Petri net will deadlock.
+
+     <p>In future versions of <acronym>BPEL2oWFN</acronym> these found deadlocks
+shall be mapped back into the <acronym title="Business Process Execution Language for Web Services">BPEL</acronym> code to highlight the
+&ldquo;unreasonable&rdquo; activities (i.e. a cycle-closing link).
+
+     <li><b>Unfoldings of high-level places</b>. Due to the abstraction (high-level to
+low-level) of the patterns some places were unfolded: the place
+<span class="samp">compScope</span> of Fig. 42&ndash;44 usually holding a token with a name
+of a scope is unfolded to <span class="samp">compScope.</span><var>scopename</var> and only
+merged with the <span class="samp">ch_in</span>-place of that respective scope. In all
+other cases the places are &ldquo;converted&rdquo; to low-level places so the
+generated model completely abstracts from data.
+
+     <li><b>Link semantics</b>. The generated Petri net model always
+generates <span class="samp">negLink</span> places for structured activities
+independently of the presence of links. Anyway, the semantics is not
+changed since the resulting subnets are dead in this case.
+
+     <li><b>Correlation sets</b>. Correlation sets are not implemented and
+are simply ignored during parsing. 
+</ul>
+
+<!--  -->
+<div class="node">
+<p><hr>
+<a name="Petri-Net_002drelated-Functions"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Limitations-and-Bugs">Limitations and Bugs</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="#Petri-Net-Patterns">Petri Net Patterns</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
+<br>
+</div>
+
+<h2 class="chapter">5 Petri Net-related Functions</h2>
+
+<p>Currently implemented Petri net-specific functions:
+
+<h3 class="section">5.1 Structural Simplification</h3>
+
+     <ul>
+<li>If two transitions t_1 and t_2 have the same
+preset and postset, one of them can be removed.
+
+     <li>If a transition has a singleton preset and postset, the
+transition can be removed (sequence) and the preset and postset can
+be merged.
+
+     <li>All places with empty preset and postset (isolated places) are
+removed. 
+</ul>
+
+<p>These structural reduction rules are implemented in the command-line option
+<span class="samp">--parameter=simplify</span>, see <a href="#Invoking-BPEL2oWFN">Invoking BPEL2oWFN</a>). To acheive a
+better reduction, combine the parameter with <span class="samp">--parameter=novarialbles</span>.
+
+<h3 class="section">5.2 Abstractions</h3>
+
+     <ul>
+<li>To obtain a place/transition Petri net from an open workflow
+net the communication places are removed. This abstraction from
+communicational behavior is used in all Petri net output formats
+except <acronym title="open Workflow Net">oWFN</acronym> (<span class="samp">--format=owfn</span>).
+
+     <li>The original Petri net semantics [Sta05] consists of high-level
+Petri net patterns. However, the models generated from <acronym>BPEL2oWFN</acronym>
+abstract from data. Therefore all transition guards, arc inscriptions
+and arc types were &ldquo;converted&rdquo; to low-level constructs: all
+transition guards and arc inscriptions were removed (decisions are
+now made non-deterministically) and read arcs are &ldquo;unfolded&rdquo; to
+loops. Due to a new fault management (see <a href="#Changes-and-Modulation">Changes and Modulation</a>) the patterns do not contain any reset arcs and is 1-safe. 
+</ul>
+
+<h3 class="section">5.3 Markings</h3>
+
+<p>The following places are initially marked to ensure a deadlock-free
+model of processes with &ldquo;reasonable&rdquo; control-flow (e.g. with an
+acyclic link structure):
+
+     <ul>
+<li>the initial place of the process (<span class="samp">1.internal.initial</span>),
+
+     <li>the variable places (<span class="samp">variable.</span><var>variablename</var>), and
+
+     <li>the clock (<span class="samp">1.internal.clock</span>) if the process embeds an
+alarm event handler or a <code>&lt;wait&gt;</code> activity. 
+</ul>
+
+<!--  -->
+<div class="node">
+<p><hr>
+<a name="Limitations-and-Bugs"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Future-Work">Future Work</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="#Petri-Net_002drelated-Functions">Petri Net-related Functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
+<br>
+</div>
+
+<h2 class="chapter">6 Limitations and Bugs</h2>
+
+<!-- @section Limitations -->
+<!-- The current version of @acronym{BPEL2oWFN} underlies several limitations: -->
+<!-- @itemize -->
+<!-- @item The pattern database consists of only one collection of patterns -->
+<!-- (i.e.@: the semantics of [Sta05], see @cite{Petri Net Patterns}). However, -->
+<!-- the patterns are parametrized: using the command-line arguments -->
+<!-- @samp{-parameter=nostandardfaults} and/or @samp{-parameter=cyclicwhile} -->
+<!-- yield to different models using the same ``base'' semantics. -->
+<!-- @end itemize -->
+<h3 class="section">6.1 Known Bugs</h3>
+
+<p>As this is the first public version of <acronym>BPEL2oWFN</acronym> the
+translation from a <acronym title="Business Process Execution Language for Web Services">BPEL</acronym> process to an open workflow net
+might be unstable or incorrect in some few scenarios:
+
+     <ul>
+<li><b>Problem:</b> The original semantics of [Sta05] was created to
+support executable <acronym title="Business Process Execution Language for Web Services">BPEL</acronym> processes. Therefore the
+translation of abstract <acronym title="Business Process Execution Language for Web Services">BPEL</acronym> processes (business
+protocols) might throw an exception or even crash.
+
+     <p><b>Solution:</b> Each communicating activity (i.e. <code>invoke</code>,
+<code>receive</code>, <code>reply</code>) should be defined with (input/output)
+variables.
+
+     <!-- @item @b{Problem:} The implementation of the structural reduction -->
+<!-- rules might crash when applied to @acronym{BPEL} processes that -->
+<!-- created Petri nets with a large number of nodes. -->
+<!-- @b{Solution:} Avoid using the @samp{-parameter=simplify} mode in this case. -->
+<li><b>Problem:</b> The parser of <acronym>BPEL2oWFN</acronym> is not capable
+of skipping <acronym title="Extensible Markup Lanuage">XML</acronym> elements originating other namespaces than
+`<code>bpws</code>'. Processes using these elements are rejected with a
+syntax error message.
+
+     <p><b>Solution:</b> Try removing or commenting these elements.
+
+     <li><b>Problem:</b> <acronym>LoLA</acronym> does not accept the generated files and
+reports parse errors in the first line.
+
+     <p><b>Solution:</b> This problem occurs using a pre-compiled windows version
+of <acronym>BPEL2oWFN</acronym>. The generated files are in Windows format, yet
+<acronym>LoLA</acronym> only supports files in Unix format. To overcome this
+limitation of <acronym>LoLA</acronym>, use a tool like <span class="samp">dos2unix</span> or
+change the file format in an editor like vi. 
+</ul>
+
+<p><a name="Reporting-Bugs"></a>
+
+<h3 class="section">6.2 Reporting Bugs</h3>
+
+<p>If you find a bug in <acronym>BPEL2oWFN</acronym>, please first check that it
+is not a known bug listed in `Known Bugs'. Otherwise please send us
+an electronic mail to <a href="mailto:nlohmann@informatik.hu-berlin.de">nlohmann@informatik.hu-berlin.de</a>. 
+Include the version number which you can find by running
+<span class="samp">bpel2owfn --version</span>. Also include in your message the input
+<acronym title="Business Process Execution Language for Web Services">BPEL</acronym> process and the output that the program produced. We
+will try to answer your mail within a week.
+
+<p>If you have other questions, comments or suggestions about
+<acronym>BPEL2oWFN</acronym>, contact us via electronic mail to
+<a href="mailto:nlohmann@informatik.hu-berlin.de">nlohmann@informatik.hu-berlin.de</a>.
+
+<h3 class="section">6.3 Contact Person</h3>
+
+<p>Niels Lohmann
+
+<p>Humboldt-Universit&auml;t zu Berlin<br>
+Institut f&uuml;r Informatik<br>
+Unter den Linden 6<br>
+10099 Berlin, Germany
+
+     <dl>
+<dt>Homepage<dd><a href="http://www2.informatik.hu-berlin.de/top/mitarbeiter/lohmann">http://www2.informatik.hu-berlin.de/top/mitarbeiter/lohmann</a>
+
+     <dt>E-mail<dd><a href="mailto:nlohmann@informatik.hu-berlin.de">nlohmann@informatik.hu-berlin.de</a>
+
+     <dt>Phone<dd>(+49) (30) 2093-3070
+
+     <dt>Fax<dd>(+49) (30) 2093-3067
+</dl>
+
+<!--  -->
+<div class="node">
+<p><hr>
+<a name="Future-Work"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#References">References</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="#Limitations-and-Bugs">Limitations and Bugs</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
+<br>
+</div>
+
+<h2 class="chapter">7 Future Work</h2>
+
+<p>For future releases of <acronym>BPEL2oWFN</acronym> the following features are planned:
+
+     <ul>
+<!-- @item @b{Flexible model generation}. Originally, @acronym{BPEL2oWFN} -->
+<!-- was designed to support flexible model generation, i.e.@: finding the -->
+<!-- most abstract (thus smallest) model capable to check a given -->
+<!-- property. With static analysis we hope to generate the smallest -->
+<!-- Petri net possible to check properties like deadlock-freedom or -->
+<!-- controllability. -->
+
+     <li><b>Add data aspects</b>. In the implemented patterns we abstract
+from data and do not evaluate join or transition conditions. Instead all
+decisions are made non-deterministically. With static analysis it is
+possible to find the relevant ranges of values that allow a replacement
+of non-deterministic choices with choices made evaulating data. This
+technique (called <i>abstract interpretation</i>) might help to reduce the
+modelled behavior of the process yet being more precise.
+
+     <li><b>Control flow analysis</b>. In [Hei03] a control flow graph for
+<acronym title="Business Process Execution Language for Web Services">BPEL</acronym> was introduced. This control flow graph (currently
+implemented prototypic) is the base for more sophisticated analysis,
+e.g. finding unreachable activities, uninitialized variables or
+other problems that can occur during runtime.
+
+     <!-- @item @b{More Petri net patterns}. Being feature-complete the Petri -->
+<!-- nets generated from the Petri net semantics of [Sta05] consist of a -->
+<!-- large number of nodes and might be to large to be analyzed by model -->
+<!-- checkers. The elaboration of different petri net patterns -->
+<!-- specialized for certain purposes (e.g.@: omitting the negative control -->
+<!-- flow) does not only help to find smaller models, but is also a -->
+<!-- prerequisite for flexible model generation. -->
+<li><b>Detailed info-files</b>. The generated info-files currently just
+list the nodes of the generated net. To help the retranslation of Petri
+net-specific properties to the input process the generated files have
+to be more detailed. The integration of a symbol table is currently
+in pre-beta state and should be finished in the next version of
+<acronym>BPEL2oWFN</acronym>.
+
+     <li><b>Support for <acronym>WS-BPEL</acronym></b>. The specification of
+<acronym title="Web Service Business Process Execution Language">WS-BPEL</acronym> (Web Service Business Process Execution Language)
+version 2.0 is in its final phase. As soon as the standardization is
+completed, <acronym title="Web Service Business Process Execution Language">WS-BPEL</acronym> can be supported by <acronym>BPEL2oWFN</acronym>
+by overworking the grammar and adding appropriate patterns to the
+pattern database.
+
+</ul>
+
+<!--  -->
+<div class="node">
+<p><hr>
+<a name="References"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#GNU-General-Public-License">GNU General Public License</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="#Future-Work">Future Work</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
+<br>
+</div>
+
+<h2 class="appendix">Appendix A References</h2>
+
+     <dl>
+<dt>[ACD^+03]<dd>Tony Andrews, Francisco Curbera, Hitesh Dholakia, Yaron Goland, Johannes Klein,
+Frank Leymann, Kevin Liu, Dieter Roller, Doug Smith, Satish Thatte, Ivana
+Trickovic, and Sanjiva Weerawarana. <b>Business Process Execution Language for
+Web Services, Version 1.1</b>. Technical report, BEA Systems, IBM, Microsoft, SAP,
+Siebel Systems. May 2003.
+
+     <br><dt>[BKK95]<dd>Falko Bause, Peter Kemper, and Pieter Kritzinger. <b>Abstract Petri Net
+Notation</b>. <i>Petri Net Newsletter</i> 49:9-27, October 1995. 
+<a rel="footnote" href="#fn-3" name="fnd-3"><sup>3</sup></a>
+
+     <br><dt>[Fiona]<dd>Peter Massuthe and Daniela Weinberg. <b>Fiona</b>.<a rel="footnote" href="#fn-4" name="fnd-4"><sup>4</sup></a>
+
+     <br><dt>[Hei03]<dd>Thomas Heidinger. <b>Statische Analyse von BPEL4WS-Prozessmodellen</b> <i>(in German)</i>. 
+Studienarbeit, Humboldt-Universit&auml;t zu Berlin, December 2003. 
+<a rel="footnote" href="#fn-5" name="fnd-5"><sup>5</sup></a>
+
+     <br><dt>[LoLA]<dd>Karsten Schmidt. <b><acronym>LoLA</acronym>: A Low Level Analyser</b>. Manual. 
+<a rel="footnote" href="#fn-6" name="fnd-6"><sup>6</sup></a>
+
+     <br><dt>[Mar03]<dd>Axel Martens. <b>Verteilte Gesch&auml;ftsprozesse &ndash; Modellierung und Verifikation
+mit Hilfe von Web Services</b> <i>(in German)</i>. PhD thesis, Humboldt-Universit&auml;t
+zu Berlin, Mathematisch-Naturwissenschaftliche Fakult&auml;t II, 2003.
+
+     <br><dt>[MCK]<dd>Javier Esparza, Claus Schr&ouml;ter, and Stefan Schwoon. <b>Model-Checking Kit</b>. 
+<a rel="footnote" href="#fn-7" name="fnd-7"><sup>7</sup></a>
+
+     <br><dt>[MRS05]<dd>Peter Massuthe, Wolfgang Reisig, and Karsten Schmidt. <b>An Operating Guideline
+Approach to the SOA</b>. Proceedings of the 2nd South-East European Workshop on
+Formal Methods 2005 (<acronym>SEEFM</acronym>05), Ohrid, Republic of Macedonia, 2005. 
+<a rel="footnote" href="#fn-8" name="fnd-8"><sup>8</sup></a>
+
+     <br><dt>[PEP]<dd>University of Oldenburg, Department of Computing Science. <b><acronym title="Programming Environment based on Petri Nets">PEP</acronym> (Programming Environment based on Petri Nets)</b>. Manual. 
+<a rel="footnote" href="#fn-9" name="fnd-9"><sup>9</sup></a>
+
+     <br><dt>[Sch00]<dd>Karsten Schmidt. <b><acronym>LoLA</acronym>: A Low Level Analyser</b>. In: Mogens Nielsen,
+and Dan Simpson, editors: <i>Application and Theory of Petri Nets, 21st
+International Conference (<acronym>ICATPN</acronym> 2000)</i>, pp. 465-474, Springer-Verlag
+(<acronym>LNCS</acronym> 1825), June 2000.
+
+     <br><dt>[SHS05]<dd>Sebastian Hinz, Karsten Schmidt, and Christian Stahl. <b>Transforming BPEL to
+Petri Nets</b>. In W.M.P. van der Aalst, B. Benatallah, F. Casati, and F. Curbera,
+editors, <i>Proceedings of the Third International Conference on Business
+Process Management (<acronym>BPM</acronym> 2005)</i>, pp. 220-235, Springer-Verlag
+(<acronym>LNCS</acronym> 3649), September 2005. 
+<a rel="footnote" href="#fn-10" name="fnd-10"><sup>10</sup></a>
+
+     <br><dt>[Sta05]<dd>Christian Stahl. <b>A Petri Net Semantics for <acronym title="Business Process Execution Language for Web Services">BPEL</acronym></b>. 
+Informatik-Berichte 188, Humboldt-Universit&auml;t zu Berlin, July 2005. 
+<a rel="footnote" href="#fn-11" name="fnd-11"><sup>11</sup></a>
+
+     <br><dt>[Wei04]<dd>Daniela Weinberg. <b>Analyse der Bedienbarkeit</b>. Diplomarbeit,
+Humboldt-Universit&auml;t zu Berlin, October 2004. 
+<a rel="footnote" href="#fn-12" name="fnd-12"><sup>12</sup></a>
+
+     <br><dt>[WK02]<dd>Michael Weber and Ekkart Kindler. <b>The Petri Net Markup Language</b>. In: Hartmut Ehrig,
+Wolfgang Reisig, Grzegorz Rozenberg, Herbert Weber, editors: <i>Petri Net Technology for
+Communication-Based Systems: Advances in Petri Nets</i>, pp. 124-144, Springer Verlag
+(<acronym>LNCS</acronym> 2472), January 2003.<a rel="footnote" href="#fn-13" name="fnd-13"><sup>13</sup></a>
+
+</dl>
+
+<!--  -->
+<!-- 2005-12-27 (nlohmann) changed `@acronym{GNU}' to @acronym{@acronym{GNU}} -->
+<!-- 2005-12-27 (nlohmann) changed to appendix -->
+<!-- 2005-12-27 (nlohmann) changed to @acronym{GNU} General Public License -->
+<!-- 2005-12-27 (nlohmann) added a node -->
+<div class="node">
+<p><hr>
+<a name="GNU-General-Public-License"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="#References">References</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
+<br>
+</div>
+
+<h2 class="appendix">Appendix B <acronym>GNU</acronym> General Public License</h2>
+
+<div align="center">Version 2, June 1991</div>
+
+<pre class="display">     Copyright &copy; 1989, 1991 Free Software Foundation, Inc.
+     59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+     
+     Everyone is permitted to copy and distribute verbatim copies
+     of this license document, but changing it is not allowed.
+</pre>
+<!-- 2005-12-27 (nlohmann) changed to heading -->
+<h3 class="heading">Preamble</h3>
+
+<p>The licenses for most software are designed to take away your
+freedom to share and change it.  By contrast, the <acronym>GNU</acronym> General Public
+License is intended to guarantee your freedom to share and change free
+software&mdash;to make sure the software is free for all its users.  This
+General Public License applies to most of the Free Software
+Foundation's software and to any other program whose authors commit to
+using it.  (Some other Free Software Foundation software is covered by
+the <acronym>GNU</acronym> Library General Public License instead.)  You can apply it to
+your programs, too.
+
+<p>When we speak of free software, we are referring to freedom, not
+price.  Our General Public Licenses are designed to make sure that you
+have the freedom to distribute copies of free software (and charge for
+this service if you wish), that you receive source code or can get it
+if you want it, that you can change the software or use pieces of it
+in new free programs; and that you know you can do these things.
+
+<p>To protect your rights, we need to make restrictions that forbid
+anyone to deny you these rights or to ask you to surrender the rights. 
+These restrictions translate to certain responsibilities for you if you
+distribute copies of the software, or if you modify it.
+
+<p>For example, if you distribute copies of such a program, whether
+gratis or for a fee, you must give the recipients all the rights that
+you have.  You must make sure that they, too, receive or can get the
+source code.  And you must show them these terms so they know their
+rights.
+
+<p>We protect your rights with two steps: (1) copyright the software, and
+(2) offer you this license which gives you legal permission to copy,
+distribute and/or modify the software.
+
+<p>Also, for each author's protection and ours, we want to make certain
+that everyone understands that there is no warranty for this free
+software.  If the software is modified by someone else and passed on, we
+want its recipients to know that what they have is not the original, so
+that any problems introduced by others will not reflect on the original
+authors' reputations.
+
+<p>Finally, any free program is threatened constantly by software
+patents.  We wish to avoid the danger that redistributors of a free
+program will individually obtain patent licenses, in effect making the
+program proprietary.  To prevent this, we have made it clear that any
+patent must be licensed for everyone's free use or not licensed at all.
+
+<p>The precise terms and conditions for copying, distribution and
+modification follow.
+
+     <ol type=1 start=0>
+<li>This License applies to any program or other work which contains
+a notice placed by the copyright holder saying it may be distributed
+under the terms of this General Public License.  The &ldquo;Program,&rdquo; below,
+refers to any such program or work, and a &ldquo;work based on the Program&rdquo;
+means either the Program or any derivative work under copyright law:
+that is to say, a work containing the Program or a portion of it,
+either verbatim or with modifications and/or translated into another
+language.  (Hereinafter, translation is included without limitation in
+the term &ldquo;modification.&rdquo;)  Each licensee is addressed as &ldquo;you.&rdquo;
+
+     <p>Activities other than copying, distribution and modification are not
+covered by this License; they are outside its scope.  The act of
+running the Program is not restricted, and the output from the Program
+is covered only if its contents constitute a work based on the
+Program (independent of having been made by running the Program). 
+Whether that is true depends on what the Program does.
+
+     <li>You may copy and distribute verbatim copies of the Program's
+source code as you receive it, in any medium, provided that you
+conspicuously and appropriately publish on each copy an appropriate
+copyright notice and disclaimer of warranty; keep intact all the
+notices that refer to this License and to the absence of any warranty;
+and give any other recipients of the Program a copy of this License
+along with the Program.
+
+     <p>You may charge a fee for the physical act of transferring a copy, and
+you may at your option offer warranty protection in exchange for a fee.
+
+     <li>You may modify your copy or copies of the Program or any portion
+of it, thus forming a work based on the Program, and copy and
+distribute such modifications or work under the terms of Section 1
+above, provided that you also meet all of these conditions:
+
+          <ol type=a start=1>
+<li>You must cause the modified files to carry prominent notices
+stating that you changed the files and the date of any change.
+
+          <li>You must cause any work that you distribute or publish, that in
+whole or in part contains or is derived from the Program or any
+part thereof, to be licensed as a whole at no charge to all third
+parties under the terms of this License.
+
+          <li>If the modified program normally reads commands interactively
+when run, you must cause it, when started running for such
+interactive use in the most ordinary way, to print or display an
+announcement including an appropriate copyright notice and a
+notice that there is no warranty (or else, saying that you provide
+a warranty) and that users may redistribute the program under
+these conditions, and telling the user how to view a copy of this
+License.  (Exception: if the Program itself is interactive but
+does not normally print such an announcement, your work based on
+the Program is not required to print an announcement.)
+          </ol>
+
+     <p>These requirements apply to the modified work as a whole.  If
+identifiable sections of that work are not derived from the Program,
+and can be reasonably considered independent and separate works in
+themselves, then this License, and its terms, do not apply to those
+sections when you distribute them as separate works.  But when you
+distribute the same sections as part of a whole which is a work based
+on the Program, the distribution of the whole must be on the terms of
+this License, whose permissions for other licensees extend to the
+entire whole, and thus to each and every part regardless of who wrote it.
+
+     <p>Thus, it is not the intent of this section to claim rights or contest
+your rights to work written entirely by you; rather, the intent is to
+exercise the right to control the distribution of derivative or
+collective works based on the Program.
+
+     <p>In addition, mere aggregation of another work not based on the Program
+with the Program (or with a work based on the Program) on a volume of
+a storage or distribution medium does not bring the other work under
+the scope of this License.
+
+     <li>You may copy and distribute the Program (or a work based on it,
+under Section 2) in object code or executable form under the terms of
+Sections 1 and 2 above provided that you also do one of the following:
+
+          <ol type=a start=1>
+<li>Accompany it with the complete corresponding machine-readable
+source code, which must be distributed under the terms of Sections
+1 and 2 above on a medium customarily used for software interchange; or,
+
+          <li>Accompany it with a written offer, valid for at least three
+years, to give any third party, for a charge no more than your
+cost of physically performing source distribution, a complete
+machine-readable copy of the corresponding source code, to be
+distributed under the terms of Sections 1 and 2 above on a medium
+customarily used for software interchange; or,
+
+          <li>Accompany it with the information you received as to the offer
+to distribute corresponding source code.  (This alternative is
+allowed only for noncommercial distribution and only if you
+received the program in object code or executable form with such
+an offer, in accord with Subsection b above.)
+          </ol>
+
+     <p>The source code for a work means the preferred form of the work for
+making modifications to it.  For an executable work, complete source
+code means all the source code for all modules it contains, plus any
+associated interface definition files, plus the scripts used to
+control compilation and installation of the executable.  However, as a
+special exception, the source code distributed need not include
+anything that is normally distributed (in either source or binary
+form) with the major components (compiler, kernel, and so on) of the
+operating system on which the executable runs, unless that component
+itself accompanies the executable.
+
+     <p>If distribution of executable or object code is made by offering
+access to copy from a designated place, then offering equivalent
+access to copy the source code from the same place counts as
+distribution of the source code, even though third parties are not
+compelled to copy the source along with the object code.
+
+     <li>You may not copy, modify, sublicense, or distribute the Program
+except as expressly provided under this License.  Any attempt
+otherwise to copy, modify, sublicense or distribute the Program is
+void, and will automatically terminate your rights under this License. 
+However, parties who have received copies, or rights, from you under
+this License will not have their licenses terminated so long as such
+parties remain in full compliance.
+
+     <li>You are not required to accept this License, since you have not
+signed it.  However, nothing else grants you permission to modify or
+distribute the Program or its derivative works.  These actions are
+prohibited by law if you do not accept this License.  Therefore, by
+modifying or distributing the Program (or any work based on the
+Program), you indicate your acceptance of this License to do so, and
+all its terms and conditions for copying, distributing or modifying
+the Program or works based on it.
+
+     <li>Each time you redistribute the Program (or any work based on the
+Program), the recipient automatically receives a license from the
+original licensor to copy, distribute or modify the Program subject to
+these terms and conditions.  You may not impose any further
+restrictions on the recipients' exercise of the rights granted herein. 
+You are not responsible for enforcing compliance by third parties to
+this License.
+
+     <li>If, as a consequence of a court judgment or allegation of patent
+infringement or for any other reason (not limited to patent issues),
+conditions are imposed on you (whether by court order, agreement or
+otherwise) that contradict the conditions of this License, they do not
+excuse you from the conditions of this License.  If you cannot
+distribute so as to satisfy simultaneously your obligations under this
+License and any other pertinent obligations, then as a consequence you
+may not distribute the Program at all.  For example, if a patent
+license would not permit royalty-free redistribution of the Program by
+all those who receive copies directly or indirectly through you, then
+the only way you could satisfy both it and this License would be to
+refrain entirely from distribution of the Program.
+
+     <p>If any portion of this section is held invalid or unenforceable under
+any particular circumstance, the balance of the section is intended to
+apply and the section as a whole is intended to apply in other
+circumstances.
+
+     <p>It is not the purpose of this section to induce you to infringe any
+patents or other property right claims or to contest validity of any
+such claims; this section has the sole purpose of protecting the
+integrity of the free software distribution system, which is
+implemented by public license practices.  Many people have made
+generous contributions to the wide range of software distributed
+through that system in reliance on consistent application of that
+system; it is up to the author/donor to decide if he or she is willing
+to distribute software through any other system and a licensee cannot
+impose that choice.
+
+     <p>This section is intended to make thoroughly clear what is believed to
+be a consequence of the rest of this License.
+
+     <li>If the distribution and/or use of the Program is restricted in
+certain countries either by patents or by copyrighted interfaces, the
+original copyright holder who places the Program under this License
+may add an explicit geographical distribution limitation excluding
+those countries, so that distribution is permitted only in or among
+countries not thus excluded.  In such case, this License incorporates
+the limitation as if written in the body of this License.
+
+     <li>The Free Software Foundation may publish revised and/or new versions
+of the General Public License from time to time.  Such new versions will
+be similar in spirit to the present version, but may differ in detail to
+address new problems or concerns.
+
+     <p>Each version is given a distinguishing version number.  If the Program
+specifies a version number of this License which applies to it and &ldquo;any
+later version,&rdquo; you have the option of following the terms and conditions
+either of that version or of any later version published by the Free
+Software Foundation.  If the Program does not specify a version number of
+this License, you may choose any version ever published by the Free Software
+Foundation.
+
+     <li>If you wish to incorporate parts of the Program into other free
+programs whose distribution conditions are different, write to the author
+to ask for permission.  For software which is copyrighted by the Free
+Software Foundation, write to the Free Software Foundation; we sometimes
+make exceptions for this.  Our decision will be guided by the two goals
+of preserving the free status of all derivatives of our free software and
+of promoting the sharing and reuse of software generally.
+
+     <li>BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
+FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT WHEN
+OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES
+PROVIDE THE PROGRAM &ldquo;AS IS&rdquo; WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED
+OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  THE ENTIRE RISK AS
+TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU.  SHOULD THE
+PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING,
+REPAIR OR CORRECTION.
+
+     <li>IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
+WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR
+REDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES,
+INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING
+OUT OF THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED
+TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY
+YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER
+PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGES.
+     </ol>
+
+<!-- 2005-12-27 (nlohmann) changed to heading -->
+<h3 class="heading">How to Apply These Terms to Your New Programs</h3>
+
+<p>If you develop a new program, and you want it to be of the greatest
+possible use to the public, the best way to achieve this is to make it
+free software which everyone can redistribute and change under these terms.
+
+<p>To do so, attach the following notices to the program.  It is safest
+to attach them to the start of each source file to most effectively
+convey the exclusion of warranty; and each file should have at least
+the &ldquo;copyright&rdquo; line and a pointer to where the full notice is found.
+
+<pre class="smallexample">     <var>one line to give the program's name and an idea of what it does.</var>
+     Copyright (C) 19<var>yy</var>  <var>name of author</var>
+     
+     This program is free software; you can redistribute it and/or
+     modify it under the terms of the <acronym>GNU</acronym> General Public License
+     as published by the Free Software Foundation; either version 2
+     of the License, or (at your option) any later version.
+     
+     This program is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     <acronym>GNU</acronym> General Public License for more details.
+     
+     You should have received a copy of the <acronym>GNU</acronym> General Public License along
+     with this program; if not, write to the Free Software Foundation, Inc.,
+     59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+</pre>
+<p>Also add information on how to contact you by electronic and paper mail.
+
+<p>If the program is interactive, make it output a short notice like this
+when it starts in an interactive mode:
+
+<pre class="smallexample">     Gnomovision version 69, Copyright (C) 20<var>yy</var> <var>name of author</var>
+     Gnomovision comes with ABSOLUTELY NO WARRANTY; for details
+     type `show w'.  This is free software, and you are welcome
+     to redistribute it under certain conditions; type `show c'
+     for details.
+</pre>
+<p>The hypothetical commands <span class="samp">show w</span> and <span class="samp">show c</span> should show
+the appropriate parts of the General Public License.  Of course, the
+commands you use may be called something other than <span class="samp">show w</span> and
+<span class="samp">show c</span>; they could even be mouse-clicks or menu items&mdash;whatever
+suits your program.
+
+<p>You should also get your employer (if you work as a programmer) or your
+school, if any, to sign a &ldquo;copyright disclaimer&rdquo; for the program, if
+necessary.  Here is a sample; alter the names:
+
+<pre class="smallexample">     Yoyodyne, Inc., hereby disclaims all copyright
+     interest in the program `Gnomovision'
+     (which makes passes at compilers) written
+     by James Hacker.
+     
+     <var>signature of Ty Coon</var>, 1 April 1989
+     Ty Coon, President of Vice
+</pre>
+<p>This General Public License does not permit incorporating your program into
+proprietary programs.  If your program is a subroutine library, you may
+consider it more useful to permit linking proprietary applications with the
+library.  If this is what you want to do, use the <acronym>GNU</acronym> Library General
+Public License instead of this License.
+
+<div class="footnote">
+<hr>
+<a name="texinfo-footnotes-in-document"></a><h4>Footnotes</h4><p class="footnote"><small>[<a name="fn-1" href="#fnd-1">1</a>]</small> In fact, <acronym>BPEL2oWFN</acronym> can simulate the behavior of
+<acronym>BPEL2PN</acronym> with a command-line parameter (see <a href="#Invoking-BPEL2oWFN">Invoking BPEL2oWFN</a>).</p>
+
+<p class="footnote"><small>[<a name="fn-2" href="#fnd-2">2</a>]</small> The Petri nets usually have a large number of nodes so that
+the graphical representation of a `real world' process would not be suitable to
+process, read or understand. That is why the Dot output shall be seen as a
+means to debug small patterns.</p>
+
+<p class="footnote"><small>[<a name="fn-3" href="#fnd-3">3</a>]</small> <a href="http://ls4-www.informatik.uni-dortmund.de/QM/MA/fb/publication_ps_files/APNN.ps.gz">http://ls4-www.informatik.uni-dortmund.de/QM/MA/fb/publication_ps_files/APNN.ps.gz</a></p>
+
+<p class="footnote"><small>[<a name="fn-4" href="#fnd-4">4</a>]</small> Soon available at <a href="http://www2.informatik.hu-berlin.de/top/tools4bpel/fiona">http://www2.informatik.hu-berlin.de/top/tools4bpel/fiona</a></p>
+
+<p class="footnote"><small>[<a name="fn-5" href="#fnd-5">5</a>]</small> <a href="http://www2.informatik.hu-berlin.de/top/download/publications/heidinger03.pdf">http://www2.informatik.hu-berlin.de/top/download/publications/heidinger03.pdf</a></p>
+
+<p class="footnote"><small>[<a name="fn-6" href="#fnd-6">6</a>]</small> <a href="http://www2.informatik.hu-berlin.de/top/lola/doku.ps">http://www2.informatik.hu-berlin.de/top/lola/doku.ps</a></p>
+
+<p class="footnote"><small>[<a name="fn-7" href="#fnd-7">7</a>]</small> <a href="http://www.fmi.uni-stuttgart.de/szs/tools/mckit">http://www.fmi.uni-stuttgart.de/szs/tools/mckit</a></p>
+
+<p class="footnote"><small>[<a name="fn-8" href="#fnd-8">8</a>]</small> <a href="http://www2.informatik.hu-berlin.de/top/download/publications/MassutheReisigSchmidt-OGApproach.ps">http://www2.informatik.hu-berlin.de/top/download/publications/MassutheReisigSchmidt-OGApproach.ps</a></p>
+
+<p class="footnote"><small>[<a name="fn-9" href="#fnd-9">9</a>]</small> <a href="http://parsys.informatik.uni-oldenburg.de/~pep">http://parsys.informatik.uni-oldenburg.de/~pep</a></p>
+
+<p class="footnote"><small>[<a name="fn-10" href="#fnd-10">10</a>]</small> <a href="http://www2.informatik.hu-berlin.de/top/bpel2pn">http://www2.informatik.hu-berlin.de/top/bpel2pn</a></p>
+
+<p class="footnote"><small>[<a name="fn-11" href="#fnd-11">11</a>]</small> <a href="http://www2.informatik.hu-berlin.de/Institut/struktur/systemanalyse/preprint/stahl188.pdf">http://www2.informatik.hu-berlin.de/Institut/struktur/systemanalyse/preprint/stahl188.pdf</a></p>
+
+<p class="footnote"><small>[<a name="fn-12" href="#fnd-12">12</a>]</small> <a href="http://www2.informatik.hu-berlin.de/top/download/publications/weinberg04.pdf">http://www2.informatik.hu-berlin.de/top/download/publications/weinberg04.pdf</a></p>
+
+<p class="footnote"><small>[<a name="fn-13" href="#fnd-13">13</a>]</small> <a href="http://www2.informatik.hu-berlin.de/top/pnml/download/about/PNML_LNCS.pdf">http://www2.informatik.hu-berlin.de/top/pnml/download/about/PNML_LNCS.pdf</a></p>
+
+<p><hr></div>
+
+</body></html>
+

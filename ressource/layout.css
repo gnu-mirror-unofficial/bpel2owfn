@@ -1,0 +1,14 @@
+html          { font-family: Tahoma }
+
+.navigation   { float: right; border-top: 5px solid #000000;  }
+
+h3           { border-bottom:1px solid #CCCCCC; }
+
+ul           { list-style-type: square; margin-left:1em }
+
+a:hover      { text-decoration: none }
+
+body         { color: #000000; background-color: #FFFFFF; z-index: 1 }
+
+dd           { border-top-style: solid; 
+               border-top-width: 1px; font-size:smaller; margin-bottom:0; margin-left:0; margin-right:0; margin-top:5em; text-align:right }
