@@ -10,6 +10,9 @@
 	margin-left: 10px;
 	margin-right: 10px;
 }
+.style2 {
+	margin-left: 40px;
+}
 </style>
 </head>
 
@@ -28,55 +31,62 @@
 	<table border="0" id="table2" cellspacing="0" cellpadding="0" align="right">
 		<tr>
 			<td><a href="index.html">Overview</a> <a href="download.html">Download</a>
-			<a href="manual.html">Manual</a> <strong>References</strong> <a href="contact.html">Contact</a> |
+			<a href="manual.html">Manual</a> <strong>Publications</strong> <a href="contact.html">Contact</a> |
 			<a href="http://www.informatik.hu-berlin.de/top/tools4bpel/tools.html">
 			Tools4BPEL</a></td>
 		</tr>
 	</table>
 </div>
-<h2>References</h2>
-<blockquote><p>The Petri net semantics is based upon the work of Christian Stahl:</p>
+<h2>Publications</h2>
+<p class="style2">The
+<a href="http://www2.informatik.hu-berlin.de/top/index.php?language=EN">Theory 
+of Programming group</a> at the <a href="http://www.hu-berlin.de">
+Humboldt-Universität zu Berlin</a> developed a Petri net semantics for BPEL4WS 
+1.1 in 2004. Due to ambiguities in the imprecise BPEL4WS 1.1 specification 
+(e.g., link semantics, compensation of nested scopes), several design decisions 
+had to be made. Later, in 2007, this semantics was enhanced to also cover 
+WS-BPEL 2.0.</p>
+<h3>Petri Net Semantics</h3>
+<blockquote>
 	<ul>
 		<li>Christian Stahl. <strong>Transformation von BPEL4WS in Petrinetze</strong>. 
-		Diplomarbeit, Humboldt-Universität zu Berlin, April 2004.</li>
+		Diplomarbeit, Humboldt-Universität zu Berlin, April 2004; (in German). [<a href="http://www2.informatik.hu-berlin.de/top/download/publications/stahl04.pdf">PDF</a>]<br>
+&nbsp; </li>
 		<li>Karsten Schmidt and Christian Stahl. <strong>A Petri net semantic 
 		for BPEL4WS - validation and application</strong>. In Ekkart Kindler, 
 		editor, <em>Proceedings of the 11th Workshop on Algorithms and Tools for 
 		Petri Nets (AWPN'04)</em>, pages 1-6, October 2004. Universität 
-		Paderborn.</li>
+		Paderborn. [<a href="http://wwwcs.upb.de/cs/kindler/events/AWPN04/material/proceedings.pdf">PDF</a>]<br>
+&nbsp;</li>
 		<li>Christian Stahl. <strong>A Petri Net Semantics for BPEL</strong>. 
-		Informatik-Berichte 188, Humboldt-Universität zu Berlin, July 2005.</li>
-	</ul>
-	<p>This semantics was implemented by Sebastian Hinz:</p>
-	<ul>
+		Informatik-Berichte 188, Humboldt-Universität zu Berlin, July 2005. [<a href="http://www2.informatik.hu-berlin.de/Institut/struktur/systemanalyse/preprint/stahl188.pdf">PDF</a>]<br>
+&nbsp;</li>
 		<li>Sebastian Hinz. <strong>Implementierung einer Petrinetz-Semantik für 
-		BPEL</strong>. Diplomarbeit, Humboldt-Universität zu Berlin, March 2005.</li>
-		<li>Website of <strong>
-		<a href="http://www.informatik.hu-berlin.de/top/bpel2pn">BPEL2PN</a></strong></li>
+		BPEL</strong>. Diplomarbeit, Humboldt-Universität zu Berlin, March 2005; 
+		(in German). [<a href="http://www2.informatik.hu-berlin.de/top/download/publications/Hinz05.pdf">PDF</a>]<br>
+&nbsp;</li>
 	</ul>
-	<p>First experimental results were presented in:</p>
+	</blockquote>
+	<h3>Case Studies</h3>
+<blockquote>
 	<ul>
-		<li>Sebastian Hinz, Karsten Schmidt, and Christian Stahl. <strong>
-		Transforming BPEL to Petri Nets</strong>. In Wil M. P. van der Aalst, B. 
+		<li>Sebastian Hinz, Karsten Schmidt, and Christian Stahl. <strong>Transforming BPEL to Petri Nets</strong>. In Wil M. P. van der Aalst, B. 
 		Benatallah, F. Casati, and F. Curbera, editors, <em>Proceedings of the 
 		Third International Conference on Business Process Management (BPM 2005)</em>, 
 		volume 3649 of Lecture Notes in Computer Science, Nancy, France, pages 
-		220-235, September 2005. Springer-Verlag.</li>
-	</ul>
-	<p>The semantics has been improved and extended to model the communicational 
-	behavior of BPEL processes. This semantics is implemented in BPEL2oWFN. A 
-	tool chain to analyze the interaction of BPEL processes was presented in:</p>
-	<ul>
+		220-235, September 2005. Springer-Verlag. [<a href="http://www.springerlink.com/openurl.asp?genre=article&amp;id=doi:10.1007/11538394_15">Springer 
+		Link</a>]<br>
+&nbsp;</li>
 		<li>Niels Lohmann, Peter Massuthe, Christian Stahl, and Daniela 
 		Weinberg. <strong>Analyzing Interacting BPEL Processes</strong>. In 
-		Schahram Dustdar, José Luiz Fiadeiro, and Amit Sheth, editors, <em>
-		Business Process Management, 4th International Conference, BPM 2006, 
+		Schahram Dustdar, José Luiz Fiadeiro, and Amit Sheth, editors, <em>Business Process Management, 4th International Conference, BPM 2006, 
 		Vienna, Austria, September 5-7, 2006, Proceedings</em>, volume 4102 of 
 		Lecture Notes in Computer Science, pages 17-32, September 2006. 
-		Springer-Verlag.</li>
-	</ul>
-	<p>The tool chain was refined and flexible model generation was introduced:</p>
-	<ul>
+		Springer-Verlag. [<a href="http://www.springerlink.com/content/u108j368336r787k/">Springer 
+		Link</a>,
+		<a href="http://www2.informatik.hu-berlin.de/top/download/publications/lohmannMSW2006_bpm.pdf">
+		PDF</a>]<br>
+&nbsp;</li>
 		<li>Niels Lohmann, Peter Massuthe, Christian Stahl, and Daniela 
 		Weinberg. <strong>Analyzing Interacting WS-BPEL Processes Using Flexible 
 		Model Generation</strong>. Data Knowl. Eng., 2007. Note: Accepted for 

@@ -1,0 +1,192 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Language" content="en-us" />
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+<title>BPEL2oWFN | Version History - GNU Project - Free Software Foundation
+</title>
+<meta name="description" content="GNU BPEL2oWFN translates a web service expressed in WS-BPEL (Web Service Business Process Execution Language) into an oWFN (open Workflow Net).">
+<link rel="stylesheet" type="text/css" href="ressource/layout.css" />
+<style type="text/css">
+.style1 {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<table border="0" width="100%" id="table1" cellspacing="0" cellpadding="0">
+	<tr>
+		<td>
+		<img src="ressource/gerwinski-gnu-head.png" width="62" height="62" class="style1"><img border="0" src="ressource/bpel2owfn.png" width="300" height="62" alt="BPEL2oWFN" /></td>
+		<td align="right" valign="bottom">Translating BPEL Process to Open Workflow 
+		Nets<br />
+		GNU BPEL2oWFN Version 2.0.0, 20 April 2007</td>
+	</tr>
+</table>
+<div class="navigation">
+	<table border="0" id="table2" cellspacing="0" cellpadding="0" align="right">
+		<tr>
+			<td><a href="index.html">Overview</a> <a href="download.html">Download</a>
+			<a href="manual.html">Manual</a> <a href="references.html">Publications</a>
+			<a href="contact.html">Contact</a> |
+			<a href="http://www.informatik.hu-berlin.de/top/tools4bpel/tools.html">
+			Tools4BPEL</a></td>
+		</tr>
+	</table>
+</div>
+<h2>Version History</h2>
+<h3><a name="2.0.0"></a>Version 2.0.0 (20 April 2007)</h3>
+<blockquote>
+	<h4>input:</h4>
+	<ul>
+		<li>executable BPEL4WS 1.1 processes</li>
+		<li>executable WS-BPEL 2.0 processes</li>
+		<li>abstract BPEL4WS 1.1 processes (experimental)</li>
+		<li>abstract WS-BPEL 2.0 processes (experimental)</li>
+	</ul>
+	<h4>output:</h4>
+	<ul>
+		<li>Petri net file formats:<ul>
+			<li>APNN</li>
+			<li>INA (untimed, low-level)</li>
+			<li>LoLA (low-level)</li>
+			<li>Fiona oWFN</li>
+			<li>PEP notation (low-level)</li>
+			<li>PNML (with extension to model interfaces)</li>
+			<li>SPIN (Promela)</li>
+		</ul>
+		</li>
+		<li>other file formats:<ul>
+			<li>Graphviz dot</li>
+			<li>XML</li>
+		</ul>
+		</li>
+	</ul>
+	<h4>implemented patterns:</h4>
+	<ul>
+		<li>overworked feature-complete Petri net semantics for BPEL4WS 1.1 and 
+		WS-BPEL 2.0</li>
+		<li>overworked simplified Petri net semantics to model the communicational 
+		behavior only</li>
+		<li>several versions of each pattern controlled by command-line parameters</li>
+	</ul>
+	<h4>static analysis</h4>
+	<ul>
+		<li>44 of 94 static analysis goals of the WS-BPEL specification are checked</li>
+		<li>read access to uninitialized variables can be detected using the CFG 
+		(control flow graph)</li>
+		<li>conflicting receiving activities can be detected using the CFG</li>
+	</ul>
+	<h4>miscellaneous:</h4>
+	<ul>
+		<li>completely overworked architecture</li>
+		<li>all Petri net-related functions are packaged to a Petri net API (application 
+		programming interface) to be published independently of BPEL2oWFN soon</li>
+		<li>statistics of the input process are displayed after implicit transformation 
+		rules are applied</li>
+		<li>messages are classified (error, warning, etc.) and numbered to allow 
+		for a detailed description in the manual</li>
+	</ul>
+</blockquote>
+<h3><a name="1.2"></a>Version 1.2 (6 April 2006)</h3>
+<blockquote>
+	<h4>overworked patterns:</h4>
+	<ul>
+		<li>more parameterized versions of the Stahl-semantics (see version 1.1):<ul>
+			<li>acyclic models (also acyclic event handlers)</li>
+			<li>models without variables</li>
+			<li>models without standard faults occurring while handling a fault</li>
+		</ul>
+		</li>
+	</ul>
+	<h4>static analysis:</h4>
+	<ul>
+		<li>A control flow graph can be built and used to detect the use of uninitialized 
+		variables.</li>
+	</ul>
+	<h4>miscellaneous:</h4>
+	<ul>
+		<li>The command-line parameter `-p finishloop&#39; is renamed to `-p finalloop&#39;.</li>
+		<li>Structural reduction rules remove all structural dead nodes of the generated 
+		Petri net model.</li>
+	</ul>
+	<h4>fixed bugs:</h4>
+	<ul>
+		<li>Pattern of asynchronous &lt;invoke&gt; activity does no longer receive messages.</li>
+		<li>Structural reduction rules no longer change the semantics of the &lt;switch&gt; 
+		activity.</li>
+		<li>Structural reduction rules no longer remove the loop transition for 
+		deadlock search.</li>
+	</ul>
+</blockquote>
+<h3><a name="1.1"></a>Version 1.1 (24 February 2006)</h3>
+<blockquote>
+	<h4>new output formats:</h4>
+	<ul>
+		<li>APNN (Abstract Petri Net Notation) Petri net</li>
+		<li>PNML (Petri Net Markup Language) Petri net</li>
+		<li>low-level PEP (Programming Environment based on Petri Nets) Petri net</li>
+	</ul>
+	<h4>overworked patterns:</h4>
+	<ul>
+		<li>the Stahl-semantics (see version 1.0) has been enhanced and can be parametrized:<br>
+		<ul>
+			<li>original semantics</li>
+			<li>models without BPEL&#39;s standard faults</li>
+			<li>acyclic models<br>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	<h4>static analysis:</h4>
+	<ul>
+		<li>To reduce the size of the Petri net model static analysis is used to 
+		only generate nodes for the DPE (dead path elimination) when necessary.</li>
+	</ul>
+	<h4>miscellaneous:</h4>
+	<ul>
+		<li>The compiler generator tools Flex, Bison and Kimwitu++ are not any more 
+		necessary to compile BPEL2oWFN: the generated sources are now part of the 
+		distribution.</li>
+		<li>The oWFN format was overworked and allows final markings.</li>
+		<li>GNU getopt allows more flexible command-line parameter processing allowing 
+		to create several output file formats in a single run.</li>
+		<li>Debug output can be written into a log file.</li>
+		<li>The classes organizing the Petri nets are overworked for performance 
+		and extensibility.</li>
+	</ul>
+	<h4>fixed bugs:</h4>
+	<ul>
+		<li>The generation of all possible types of the &lt;invoke&gt; activity (synchronous, 
+		asynchronous, with and without implicit scope) is overworked.</li>
+	</ul>
+</blockquote>
+<h3><a name="1.0"></a>Version 1.0 (16 January 2006)</h3>
+<blockquote>
+	<h4>input:</h4>
+	<ul>
+		<li>BPEL process compliant to the specificiation BPEL4WS version 1.1, May 
+		2003.</li>
+	</ul>
+	<h4>output:</h4>
+	<ul>
+		<li>LoLA Petri net</li>
+		<li>open workflow net</li>
+		<li>Dot representation</li>
+	</ul>
+	<h4>implemented patterns:</h4>
+	<ul>
+		<li>Christian Stahl. <strong>A Petri Net Semantics for BPEL</strong>. Informatik-Berichte 
+		188, Humboldt-Universität zu Berlin, July 2005. [<a href="http://www2.informatik.hu-berlin.de/Institut/struktur/systemanalyse/preprint/stahl188.pdf">PDF</a>]</li>
+	</ul>
+	<dl>
+		<dd>last changes: 22.04.2007</dd>
+	</dl>
+</blockquote>
+
+</body>
+
+</html>
