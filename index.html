@@ -14,7 +14,12 @@
 .style2 {
 	text-align: center;
 }
+.style3 {
+	border-width: 0;
+}
 </style>
+
+<script type="text/javascript" src="ressource/overlib/overlib.js"><!-- overLIB (c) Erik Bosrup --></script>
 </head>
 
 <body>
@@ -42,6 +47,7 @@
 </div>
 <h2>Overview</h2>
 <blockquote>
+
 	<p>GNU BPEL2oWFN translates a web service expressed in WS-BPEL (Web Service 
 	Business Process Execution Language) into an oWFN (open Workflow Net). This 
 	oWFN can be used to:</p>
@@ -53,9 +59,19 @@
 		<li>check any temporal logic formula with a variety of model checking 
 		tools.</li>
 	</ul>
-	<p class="style2">
-	<img alt="BPEL2oWFN diagram" src="ressource/diagram.png" width="500" height="243"></p>
-	<p>GNU BPEL2oWFN uses static analysis to make the generated oWFN as compact 
+</blockquote>
+<p class="style2"><map name="FPMap0" id="FPMap0">
+<area href="javascript:void(0);" shape="rect" coords="137, 31, 248, 118" onmouseover="return overlib('The abstract syntax tree (AST) is the main data structure of BPEL2oWFN. The AST is annotated with information gained by static analysis.', CAPTION, 'Abstract Syntax Tree', FGCOLOR, '#ffffff', BGCOLOR, '#00376c', TEXTSIZE, 2, CAPTIONSIZE, 2, WIDTH, 300)" onmouseout="return nd();">
+<area href="javascript:void(0);" shape="rect" coords="271, 31, 379, 118" onmouseover="return overlib('The annotated abstract syntax tree is used to generate a Petri net model of the BPEL process. All Petri net-related functions (adding, removing and merging of nodes; <b>structural reduction</b>) are provided by the Petri net API.', CAPTION, 'Petri Net API', FGCOLOR, '#ffffff', BGCOLOR, '#00376c', TEXTSIZE, 2, CAPTIONSIZE, 2, WIDTH, 300)" onmouseout="return nd();">
+<area href="javascript:void(0);" shape="rect" coords="137, 146, 248, 240" onmouseover="return overlib('From the abstract syntax tree, a control/data flow graph is built. This graph is used to apply static analysis algorithms to gain information (e.g., <b>dead code</b>) about the process. These algorithms Furthermore, <b>design flaws</b> such  as cyclic control links or conflicting receiving activities are detected.', CAPTION, 'Control/Data Flow Graph', FGCOLOR, '#ffffff', BGCOLOR, '#00376c', TEXTSIZE, 2, CAPTIONSIZE, 2, WIDTH, 300)" onmouseout="return nd();">
+<area href="javascript:void(0);" shape="rect" coords="271, 146, 379, 242" onmouseover="return overlib('For each BPEL construct, several patterns with different degrees of abstraction are stored in the pattern repository. Using the information gained by static analysis, the <b>most abstract pattern</b> applicable is used.', CAPTION, 'Pattern Repository', FGCOLOR, '#ffffff', BGCOLOR, '#00376c', TEXTSIZE, 2, CAPTIONSIZE, 2, WIDTH, 300)" onmouseout="return nd();">
+<area href="javascript:void(0);" shape="rect" coords="3, 19, 98, 142" onmouseover="return overlib('BPEL2oWFN can read BPEL processes compliant to the <b>WS-BPEL 2.0</b> or the <b>BPEL4WS 1.1</b> specification.', CAPTION, 'BPEL process', FGCOLOR, '#ffffff', BGCOLOR, '#00376c', TEXTSIZE, 2, CAPTIONSIZE, 2, WIDTH, 300)" onmouseout="return nd();">
+<area href="javascript:void(0);" shape="rect" coords="423, 19, 499, 142" onmouseover="return overlib('The generated Petri net model can be exported to <b>many file formats</b>, such as PNML, LoLA, Fiona oWFN, INA, APNN, or PEP.', CAPTION, 'Petri net', FGCOLOR, '#ffffff', BGCOLOR, '#00376c', TEXTSIZE, 2, CAPTIONSIZE, 2, WIDTH, 300)" onmouseout="return nd();">
+</map>
+<img alt="BPEL2oWFN diagram" src="ressource/diagram.png" width="500" height="243" usemap="#FPMap0" class="style3"></p>
+<blockquote>
+
+	<p>GNU BPEL2oWFN uses static analysis to make the generated Petri net model as compact 
 	as possible to analyze a chosen property. This is called flexible model 
 	generation. Furthermore, several design flaws can be detected using control 
 	and data flow analysis.</p>
@@ -66,18 +82,33 @@
 	http://www.informatik.hu-berlin.de/top/tools4bpel</a> 
 	for details.</p>
 </blockquote>
-<h3>Contents</h3>
-<blockquote>
+<table style="width: 100%" cellspacing="0" cellpadding="0">
+	<tr>
+		<td valign="top" style="width: 50%">
+		<h3>Contents</h3>
 	<ul>
 		<li><a href="download.html"><strong>Download GNU BPEL2oWFN</strong></a></li>
 		<li><a href="manual.html">Manual</a></li>
 		<li><a href="references.html">References</a></li>
 		<li><a href="contact.html">Contact</a></li>
 		<li>
-		<a href="http://www.informatik.hu-berlin.de/top/tools4bpel/tools.html">
-		Tools4BPEL project page</a></li>
+		<a href="http://www.informatik.hu-berlin.de/top/tools4bpel/tools.html">Tools4BPEL project page</a></li>
 	</ul>
-</blockquote>
+		</td>
+		<td valign="top">&nbsp;</td>
+		<td valign="top" style="width: 50%">
+		<h3>News</h3>
+		<ul>
+			<li><strong>20 April 2007</strong><br>
+			GNU BPEL2oWFN 2.0.0 released<br>
+&nbsp;</li>
+			<li><strong>29 November 2006</strong><br>
+			BPEL2oWFN is part of the GNU project</li>
+		</ul>
+
+		</td>
+	</tr>
+</table>
 <dl>
 	<dd>last changes: 22.04.2007</dd>
 </dl>
