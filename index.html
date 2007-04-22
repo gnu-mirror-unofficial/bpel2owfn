@@ -46,22 +46,19 @@
 	Business Process Execution Language) into an oWFN (open Workflow Net). This 
 	oWFN can be used to:</p>
 	<ul>
-		<li>check for controllability or generate the operating guideline using
+		<li>check for <em>controllability</em> or generate the <em>operating guideline</em> using 
+		the tool
 		<a href="http://www.informatik.hu-berlin.de/top/tools4bpel/fiona">Fiona</a>,</li>
 		<li>check for deadlocks or any other Petri net property, or</li>
 		<li>check any temporal logic formula with a variety of model checking 
 		tools.</li>
 	</ul>
 	<p class="style2">
-	<img alt="tool chain" src="ressource/toolchain.png" width="537" height="107"></p>
+	<img alt="BPEL2oWFN diagram" src="ressource/diagram.png" width="500" height="243"></p>
 	<p>GNU BPEL2oWFN uses static analysis to make the generated oWFN as compact 
 	as possible to analyze a chosen property. This is called flexible model 
-	generation.</p>
-	<p>GNU BPEL2oWFN is the successor of
-	<a href="http://www.informatik.hu-berlin.de/top/bpel2pn">BPEL2PN</a>, a 
-	Java-based compiler generating low-level Petri nets. GNU BPEL2oWFN is a 
-	re-implementation for extensibility and performance issues. Its 
-	functionality is a superset of the functionality of BPEL2PN.</p>
+	generation. Furthermore, several design flaws can be detected using control 
+	and data flow analysis.</p>
 	<p>GNU BPEL2oWFN was written by Niels Lohmann, Christian Gierds and Martin 
 	Znamirowski. It is part of the Tools4BPEL project funded by the 
 	Bundesministerium für Bildung und Forschung. See
@@ -82,7 +79,7 @@
 	</ul>
 </blockquote>
 <dl>
-	<dd>last changes: 21.04.2007</dd>
+	<dd>last changes: 22.04.2007</dd>
 </dl>
 
 </body>
