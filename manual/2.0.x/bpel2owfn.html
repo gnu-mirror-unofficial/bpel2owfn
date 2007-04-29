@@ -9,9 +9,9 @@
 <!--
 About this document:
 
-This manual is for GNU BPEL2oWFN, version 2.0.0, a tool translating
+This manual is for GNU BPEL2oWFN, version 2.0.1, a tool translating
 a BPEL process into an open workflow net (oWFN), last
-updated 20 April 2007.
+updated 28 April 2007.
 
 Copyright (C) 2005, 2006, 2007 Niels Lohmann
 
@@ -48,7 +48,7 @@ distribution, or can be downloaded from the website of GNU BPEL2oWFN,
 <h1 class="settitle">GNU BPEL2oWFN User's Manual</h1>
 <div class="node">
 <p><hr>
-<a name="Top"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Invoking-BPEL2oWFN">Invoking BPEL2oWFN</a>,
+<a name="Top"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Introducing-BPEL2oWFN">Introducing BPEL2oWFN</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#dir">(dir)</a>
 <br>
 </div>
@@ -57,9 +57,9 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#dir">(dir)</a>
 
 <p><b>About this document:</b>
 
-   <p>This manual is for GNU BPEL2oWFN, version 2.0.0, a tool translating
+   <p>This manual is for GNU BPEL2oWFN, version 2.0.1, a tool translating
 a <acronym>BPEL</acronym> process into an open workflow net (<acronym>oWFN</acronym>), last
-updated 20 April 2007.
+updated 28 April 2007.
 
    <p>Copyright &copy; 2005, 2006, 2007 Niels Lohmann
 
@@ -93,10 +93,12 @@ the German Federal Ministry for Education and Research (<acronym>BMBF</acronym>)
 <!-- * Future Work:: What BPEL2oWFN will do in the future. -->
 <!-- * References:: Bibliography of cited literature. -->
 <ul class="menu">
-<li><a accesskey="1" href="#Invoking-BPEL2oWFN">Invoking BPEL2oWFN</a>:  How to invoke BPEL2oWFN. 
-<li><a accesskey="2" href="#File-Formats">File Formats</a>:  Which file formats are supported. 
-<li><a accesskey="3" href="#FAQ-and-Known-Bugs">FAQ and Known Bugs</a>:  What BPEL2oWFN cannot do, and why. 
-<li><a accesskey="4" href="#GNU-Free-Documentation-License">GNU Free Documentation License</a>: The license of this manual. 
+<li><a accesskey="1" href="#Introducing-BPEL2oWFN">Introducing BPEL2oWFN</a>:  Introducing BPEL2oWFN. 
+<li><a accesskey="2" href="#Invoking-BPEL2oWFN">Invoking BPEL2oWFN</a>:  How to invoke BPEL2oWFN. 
+<li><a accesskey="3" href="#Warnings-and-Error-Messages">Warnings and Error Messages</a>:  Warnings and Error Messages. 
+<li><a accesskey="4" href="#File-Formats">File Formats</a>:  Which file formats are supported. 
+<li><a accesskey="5" href="#FAQ-and-Known-Bugs">FAQ and Known Bugs</a>:  What BPEL2oWFN cannot do, and why. 
+<li><a accesskey="6" href="#GNU-Free-Documentation-License">GNU Free Documentation License</a>: The license of this manual. 
 </ul>
 
 <!--  -->
@@ -104,25 +106,29 @@ the German Federal Ministry for Education and Research (<acronym>BMBF</acronym>)
 <h2>Table of Contents</h2>
 <ul>
 <li><a name="toc_Top" href="#Top">GNU BPEL2oWFN</a>
-<li><a name="toc_Invoking-BPEL2oWFN" href="#Invoking-BPEL2oWFN">1 Invoking BPEL2oWFN</a>
+<li><a name="toc_Introducing-BPEL2oWFN" href="#Introducing-BPEL2oWFN">1 Introducing BPEL2oWFN</a>
 <ul>
-<li><a href="#Invoking-BPEL2oWFN">1.1 Options</a>
-<ul>
-<li><a href="#Invoking-BPEL2oWFN">1.1.1 Modes</a>
-<li><a href="#Invoking-BPEL2oWFN">1.1.2 Additional parameters</a>
-<li><a href="#Invoking-BPEL2oWFN">1.1.3 Output formats</a>
+<li><a href="#Introducing-BPEL2oWFN">1.1 Concepts of BPEL2oWFN</a>
 </li></ul>
-<li><a href="#Invoking-BPEL2oWFN">1.2 Examples</a>
-<li><a href="#Invoking-BPEL2oWFN">1.3 Warnings and Error Messages</a>
-</li></ul>
-<li><a name="toc_File-Formats" href="#File-Formats">2 File Formats</a>
-<li><a name="toc_FAQ-and-Known-Bugs" href="#FAQ-and-Known-Bugs">3 FAQ and Known Bugs</a>
+<li><a name="toc_Invoking-BPEL2oWFN" href="#Invoking-BPEL2oWFN">2 Invoking BPEL2oWFN</a>
 <ul>
-<li><a href="#FAQ-and-Known-Bugs">3.1 Frequently Asked Questions</a>
-<li><a href="#FAQ-and-Known-Bugs">3.2 Known Bugs</a>
-<li><a href="#FAQ-and-Known-Bugs">3.3 Reporting Bugs</a>
-<li><a href="#FAQ-and-Known-Bugs">3.4 Contact Person</a>
-<li><a href="#FAQ-and-Known-Bugs">3.5 Help BPEL2oWFN</a>
+<li><a href="#Invoking-BPEL2oWFN">2.1 Options</a>
+<ul>
+<li><a href="#Invoking-BPEL2oWFN">2.1.1 Modes</a>
+<li><a href="#Invoking-BPEL2oWFN">2.1.2 Additional parameters</a>
+<li><a href="#Invoking-BPEL2oWFN">2.1.3 Output formats</a>
+</li></ul>
+<li><a href="#Invoking-BPEL2oWFN">2.2 Examples</a>
+</li></ul>
+<li><a name="toc_Warnings-and-Error-Messages" href="#Warnings-and-Error-Messages">3 Warnings and Error Messages</a>
+<li><a name="toc_File-Formats" href="#File-Formats">4 File Formats</a>
+<li><a name="toc_FAQ-and-Known-Bugs" href="#FAQ-and-Known-Bugs">5 FAQ and Known Bugs</a>
+<ul>
+<li><a href="#FAQ-and-Known-Bugs">5.1 Frequently Asked Questions</a>
+<li><a href="#FAQ-and-Known-Bugs">5.2 Known Bugs</a>
+<li><a href="#FAQ-and-Known-Bugs">5.3 Reporting Bugs</a>
+<li><a href="#FAQ-and-Known-Bugs">5.4 Contact Person</a>
+<li><a href="#FAQ-and-Known-Bugs">5.5 Help BPEL2oWFN</a>
 </li></ul>
 <li><a name="toc_GNU-Free-Documentation-License" href="#GNU-Free-Documentation-License">Appendix A GNU Free Documentation License</a>
 </li></ul>
@@ -132,13 +138,80 @@ the German Federal Ministry for Education and Research (<acronym>BMBF</acronym>)
 <!--  -->
 <div class="node">
 <p><hr>
-<a name="Invoking-BPEL2oWFN"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#File-Formats">File Formats</a>,
+<a name="Introducing-BPEL2oWFN"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Invoking-BPEL2oWFN">Invoking BPEL2oWFN</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#Top">Top</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <br>
 </div>
 
-<h2 class="chapter">1 Invoking BPEL2oWFN</h2>
+<h2 class="chapter">1 Introducing BPEL2oWFN</h2>
+
+<p>BPEL2oWFN translates a web service expressed in <acronym title="Web Service Business Process Execution Language">WS-BPEL</acronym> (Web Service Business Process Execution Language)
+into an oWFN (open Workflow Net). This oWFN can be used to:
+
+     <ul>
+<li>check for <i>controllability</i> or generate the <i>operating guideline</i> using the tool Fiona<a rel="footnote" href="#fn-1" name="fnd-1"><sup>1</sup></a>,
+<li>check for deadlocks or any other Petri net property, or
+<li>check any temporal logic formula with a variety of model checking tools. 
+</ul>
+<br>
+
+<div align="center"><img src="images/diagram.png" alt="images/diagram.png"></div>
+<p><br>
+
+<p>BPEL2oWFN uses static analysis to make the generated Petri net model as compact
+as possible to analyze a chosen property. This is called <i>flexible model generation</i>. 
+Furthermore, several design flaws can be detected using control and data flow analysis.
+
+<p>BPEL2oWFN was written by Niels Lohmann, Christian Gierds and Martin Znamirowski. 
+It is part of the Tools4BPEL project funded by the Bundesministerium für Bildung und
+Forschung. See <a href="http://www.informatik.hu-berlin.de/top/tools4bpel">http://www.informatik.hu-berlin.de/top/tools4bpel</a> for details.
+
+<h3 class="section">1.1 Concepts of BPEL2oWFN</h3>
+
+<p><table summary="">
+<tr align="left"><td valign="top" width="28%"><b>Input BPEL Process</b> </td><td valign="top" width="72%">
+BPEL2oWFN can read <acronym>BPEL</acronym> processes compliant to the <acronym>WS-BPEL 2.0</acronym>
+or the <acronym>BPEL4WS</acronym> 1.1 specification.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="28%"><b>Abstract Syntax Tree</b> </td><td valign="top" width="72%">
+The <acronym title="abstract syntax tree">AST</acronym> (abstract syntax tree) is the main data structure of BPEL2oWFN. 
+The <acronym title="abstract syntax tree">AST</acronym> is annotated with information gained by static analysis.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="28%"><b>Control/Data Flow Graph</b> </td><td valign="top" width="72%">
+From the abstract syntax tree, a control/data flow graph is built. This graph
+is used to apply static analysis algorithms to gain information
+(e.g., dead code) about the process. These algorithms Furthermore, design
+flaws such as cyclic control links or conflicting receiving activities are
+detected.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="28%"><b>Petri Net API</b> </td><td valign="top" width="72%">
+The annotated abstract syntax tree is used to generate a Petri net model of the
+<acronym>BPEL</acronym> process. All Petri net-related functions (adding, removing and
+merging of nodes; structural reduction) are provided by the Petri net
+<acronym title="application programming interface">API</acronym> (application programming interface).
+
+<p><br></td></tr><tr align="left"><td valign="top" width="28%"><b>Pattern Repository</b> </td><td valign="top" width="72%">
+For each <acronym>BPEL</acronym> construct, several patterns with different degrees of
+abstraction are stored in the pattern repository. Using the information gained
+by static analysis, the most abstract pattern applicable is used.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="28%"><b>Output Petri Net</b> </td><td valign="top" width="72%">
+The generated Petri net model can be exported to many file formats, such as
+<acronym>PNML</acronym>, <acronym>LoLA</acronym>, Fiona <acronym>oWFN</acronym>, <acronym>INA</acronym>, <acronym>APNN</acronym>, or <acronym>PEP</acronym>.
+
+<br></td></tr></table>
+
+<!--  -->
+<div class="node">
+<p><hr>
+<a name="Invoking-BPEL2oWFN"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Warnings-and-Error-Messages">Warnings and Error Messages</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="#Introducing-BPEL2oWFN">Introducing BPEL2oWFN</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
+<br>
+</div>
+
+<h2 class="chapter">2 Invoking BPEL2oWFN</h2>
 
 <p>The standard invocation of BPEL2oWFN is:
 
@@ -153,7 +226,7 @@ net is written to a file named <span class="file">service.owfn</span>, because o
 as a simple parser for <acronym>BPEL</acronym> processes that reads its input from the
 standard input (<code>stdin</code>).
 
-<h3 class="section">1.1 Options</h3>
+<h3 class="section">2.1 Options</h3>
 
 <p>BPEL2oWFN supports the following command-line options:
 
@@ -194,9 +267,32 @@ function is entered or left.
 <dt><span class="samp">flex</span><dd>Displays messages from Flex. Can be combined with any other debug level. 
 <dt><span class="samp">bison</span><dd>Displays messages from Bison. Can be combined with any other debug level. 
 </dl>
-     </dl>
 
-<h4 class="subsection">1.1.1 Modes</h4>
+     <br><dt><span class="samp">--reduce=0-5</span><dt><span class="samp">-r 0-5</span><dd>Apply several structural reduction rules to the generated Petri net model
+(implies mode <span class="samp">petrinet</span> or <span class="samp">consistency</span>). The rules preserve
+deadlocks, livelocks and all deadlock-free communicating partners. The rules
+are organized in reduction levels:
+
+          <dl>
+<dt><span class="samp">0</span><dd>No rules are applied (standard). 
+<dt><span class="samp">1</span><dd>Structural dead nodes are removed; that is, unmarked places with empty preset
+and transitions with a dead place in its preset are removed. 
+<dt><span class="samp">2</span><dd>All reduction rules from <span class="samp">-r1</span>. Additionally, unnecessary status places
+are removed. A status place is considered unnecessary if it has no outgoing
+arcs. 
+<dt><span class="samp">3</span><dd>All reduction rules from <span class="samp">-r2</span>. Additionally, identical nodes are merged. 
+Two nodes are considered identical if their presets and postsets are equal:
+
+          <div align="center"><img src="images/rb1.png" alt="images/rb1.png"> <img src="images/rb2.png" alt="images/rb2.png"></div>
+          <dt><span class="samp">4</span><dd>All reduction rules from <span class="samp">-r3</span>. Additionally, remove serial nodes:
+
+          <div align="center"><img src="images/ra1.png" alt="images/ra1.png"> <img src="images/ra2.png" alt="images/ra2.png"></div>
+          <dt><span class="samp">5</span><dd>All reduction rules from <span class="samp">-r4</span>. Additionally, remove self-loop nodes. 
+</dl>
+
+</dl>
+
+<h4 class="subsection">2.1.1 Modes</h4>
 
 <p>When invoking BPEL2oWFN several modes are possible.
 
@@ -250,7 +346,7 @@ is generated.
 
 </dl>
 
-<h4 class="subsection">1.1.2 Additional parameters</h4>
+<h4 class="subsection">2.1.2 Additional parameters</h4>
 
 <p>These options control some Petri net-related options.
 
@@ -268,11 +364,12 @@ Confines the <span class="samp">standardfaults</span> parameter: in the negative
 (in activities in fault handlers), no further <acronym>BPEL</acronym> standard faults
 can occur.
 
+          <br><dt><span class="samp">nointerface</span><dd>
+When creating a <span class="file">.dot</span> file, no interface is printed.
+
           <br><dt><span class="samp">reduce</span><dd>
-Apply several structural reduction rules to the generated Petri net model. The
-rules preserve deadlocks, livelocks and all deadlock-free communicating
-partners. In addition, structurally dead nodes of the Petri net, for example,
-unmarked places without ingoing arcs are removed.
+Apply all implemented structural reduction rules. This parameter is a shortcut
+for <span class="samp">-r5</span> and overrides any other defined reduction level.
 
           <br><dt><span class="samp">standardfaults</span><dd>
 Model the occurrence of standard faults. When this parameter is ommited, only
@@ -293,7 +390,7 @@ data aspects. Thus, this mode is experimental.
 
 </dl>
 
-<h4 class="subsection">1.1.3 Output formats</h4>
+<h4 class="subsection">2.1.3 Output formats</h4>
 
 <p>Especially for the Petri net mode, a variaty of output formats are supported. There are invoked by the
 following option:
@@ -339,7 +436,7 @@ Language">PNML</acronym> file format is &mdash; together with the
 Fiona file format &mdash; the only Petri net output format that outputs the
 complete open workflow net, that is, also the interface is exported. 
 Currently, the interface places are annotated using a <code>&lt;type&gt;</code> tag
-which is only supported by Yasper<a rel="footnote" href="#fn-1" name="fnd-1"><sup>1</sup></a>. When the parameter <span class="samp">-o</span> is used, a
+which is only supported by Yasper<a rel="footnote" href="#fn-2" name="fnd-2"><sup>2</sup></a>. When the parameter <span class="samp">-o</span> is used, a
 file with the suffix <span class="samp">.pnml</span> is created.
 
                <br><dt><span class="samp">spin</span><dd>Outputs the inner of the generated open workflow net as low-level Petri net in
@@ -380,7 +477,7 @@ used, a file with the suffix <span class="samp">.xml</span> is created.
 
 <p><a name="Examples"></a>
 
-<h3 class="section">1.2 Examples</h3>
+<h3 class="section">2.2 Examples</h3>
 
 <p>In this section we show some examples how BPEL2oWFN can be
 invoked.
@@ -417,7 +514,16 @@ file <span class="file">service1_service2.task</span> is written that can be pro
 <acronym title="Low-Level Analyzer">LoLA</acronym>. 
 </dl>
 
-<h3 class="section">1.3 Warnings and Error Messages</h3>
+<!--  -->
+<div class="node">
+<p><hr>
+<a name="Warnings-and-Error-Messages"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#File-Formats">File Formats</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="#Invoking-BPEL2oWFN">Invoking BPEL2oWFN</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
+<br>
+</div>
+
+<h2 class="chapter">3 Warnings and Error Messages</h2>
 
 <p>BPEL2oWFN performs several analysis steps on the input <acronym>BPEL</acronym> process. 
 These messages are displayed during parsing and postprocessing of the process,
@@ -431,9 +537,9 @@ translation process.
 syntactical analysis of the process. See <a href="#FAQ-and-Known-Bugs">FAQ and Known Bugs</a> for
 information about handling syntax errors.
 
-     <li><b>Static analysis messages</b> occur when a test described in the <acronym>WS-BPEL</acronym>
+     <li><b>Static analysis messages</b> occur when a test described in the <acronym title="Web Service Business Process Execution Language">WS-BPEL</acronym>
 specification detects an error in the process. When such an error is found, a
-<acronym>WS-BPEL</acronym> processor must reject the process. If the process is an
+<acronym title="Web Service Business Process Execution Language">WS-BPEL</acronym> processor must reject the process. If the process is an
 abstract process, the static analysis errors can be considered as warnings
 as abstract processes are not meant to be executed.
 
@@ -441,7 +547,7 @@ as abstract processes are not meant to be executed.
 problem should be corrected to assure executability of the input process.
 
      <li><b>Errors</b> report problems that are explicitly mentioned in the
-<acronym>WS-BPEL</acronym> specification. They should be corrected to avoid runtime
+<acronym title="Web Service Business Process Execution Language">WS-BPEL</acronym> specification. They should be corrected to avoid runtime
 errors. Furthermore, problems can arise during the generation of a Petri net
 model.
 
@@ -461,21 +567,239 @@ few lines. After the line number, the error code is displayed.
 <span class="samp">W00114</span> stands for a warning with code 114. Further details can be
 taken from the table below.
 
-<p><table summary=""><tr align="left"><th valign="top" width="10%">Code </th><th valign="top" width="15%">Type </th><th valign="top" width="75%">Description
+<p><table summary=""><tr align="left"><th valign="top" width="5%">Code </th><th valign="top" width="18%">Type </th><th valign="top" width="72%">Description
 
-<p><br></th></tr><tr align="left"><td valign="top" width="10%">1&ndash;94 </td><td valign="top" width="15%">static analysis </td><td valign="top" width="75%">
-A check for a static analysis goal defined in the <acronym>WS-BPEL</acronym>
-specification detected an error. Currently, 44 of the 94 described static
-analysis goals are checked.
+<p><br></th></tr><tr align="left"><td valign="top" width="5%">6 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+The <code>&lt;rethrow&gt;</code> activity MUST only be used within a faultHandler (i.e. 
+<code>&lt;catch&gt;</code> and <code>&lt;catchAll&gt;</code> elements).<a rel="footnote" href="#fn-3" name="fnd-3"><sup>3</sup></a>
 
-<p><br></td></tr><tr align="left"><td valign="top" width="10%">100 </td><td valign="top" width="15%">notice </td><td valign="top" width="75%">
-Either a non-standard element<a rel="footnote" href="#fn-2" name="fnd-2"><sup>2</sup></a> was parsed
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">7 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+The <code>&lt;compensateScope&gt;</code> activity MUST only be used from within a
+<code>faultHandler</code>, another <code>compensationHandler</code>, or a
+<code>terminationHandler</code>.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">8 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+The <code>&lt;compensate&gt;</code> activity MUST only be used from within a
+<code>faultHandler</code>, another <code>compensationHandler</code>, or a
+<code>terminationHandler</code>.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">15 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+To be instantiated, an executable business process MUST contain at least one
+<code>&lt;receive&gt;</code> or <code>&lt;pick&gt;</code> activity annotated with a
+<code>createInstance="yes"</code> attribute.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">16 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+A <code>partnerLink</code> MUST specify the <code>myRole</code> or the <code>partnerRole</code>,
+or both.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">17 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+The <code>initializePartnerRole</code> attribute MUST NOT be used on a partnerLink
+that does not have a partner role.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">18 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+The name of a <code>partnerLink</code> MUST be unique among the names of all
+partnerLinks defined within the same immediately enclosing scope.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">23 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+The name of a variable MUST be unique among the names of all variables defined
+within the same immediately enclosing scope.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">24 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+Variable names are <code>BPELVariableNames</code>, that is, NCNames (as defined in
+<acronym title="Extensible Markup Lanuage">XML</acronym> Schema specification) but in addition they MUST NOT contain the
+<span class="samp">.</span> character.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">25 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+The <code>messageType</code>, type or <code>element</code> attributes are used to specify
+the type of a variable. Exactly one of these attributes MUST be used.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">44 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+The name of a <code>&lt;correlationSet&gt;</code> MUST be unique among the names of all
+<code>&lt;correlationSet&gt;</code> defined within the same immediately enclosing scope.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">51 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+The <code>inputVariable</code> attribute MUST NOT be used on an <code>Invoke</code>
+activity that contains <code>&lt;toPart&gt;</code> elements.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">52 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+The <code>outputVariable</code> attribute MUST NOT be used on an <code>Invoke</code>
+activity that contains <code>&lt;toPart&gt;</code> elements.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">55 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+For <code>&lt;receive&gt;</code>, if <code>&lt;fromPart&gt;</code> elements are used on a
+<code>&lt;receive&gt;</code> activity then the variable attribute MUST NOT be used on the
+same activity.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">56 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+A &ldquo;start activity&rdquo; is a <code>&lt;receive&gt;</code> or <code>&lt;pick&gt;</code> activity that is
+annotated with a <code>createInstance="yes"</code> attribute. Activities other than
+the following: start activities, <code>&lt;scope&gt;</code>, <code>&lt;flow&gt;</code> and
+<code>&lt;sequence&gt;</code> MUST NOT be performed prior to or simultaneously with start
+activities.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">57 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+If a process has multiple start activities with correlation sets then all such
+activities MUST share at least one common correlationSet and all common
+correlationSets defined on all the activities MUST have the value of the
+<code>initiate</code> attribute be set to <code>"join"</code>.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">59 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+For <code>&lt;reply&gt;</code>, if <code>&lt;toPart&gt;</code> elements are used on a <code>&lt;reply&gt;</code>
+activity then the <code>variable</code> attribute MUST NOT be used on the same
+activity.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">62 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+If <code>&lt;pick&gt;</code> has a <code>createInstance</code> attribute with a value of
+<span class="samp">yes</span>, the events in the <code>&lt;pick&gt;</code> MUST all be <code>&lt;onMessage&gt;</code>
+events.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">63 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+The semantics of the <code>&lt;onMessage&gt;</code> event are identical to a
+<code>&lt;receive&gt;</code> activity regarding the optional nature of the <code>variable</code>
+attribute or <code>&lt;fromPart&gt;</code> elements, if <code>&lt;fromPart&gt;</code> elements on an
+activity then the variable attribute MUST NOT be used on the same activity
+(see SA00055).
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">64 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+For <code>&lt;flow&gt;</code>, a declared link's name MUST be unique among all
+<code>&lt;link&gt;</code> names defined within the same immediately enclosing
+<code>&lt;flow&gt;</code>.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">65 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+The value of the <code>linkName</code> attribute of <code>&lt;source&gt;</code> or
+<code>&lt;target&gt;</code> MUST be the name of a <code>&lt;link&gt;</code> declared in an enclosing
+<code>&lt;flow&gt;</code> activity.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">66 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+Every link declared within a <code>&lt;flow&gt;</code> activity MUST have exactly one
+activity within the <code>&lt;flow&gt;</code> as its source and exactly one activity within
+the <code>&lt;flow&gt;</code> as its target.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">67 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+Two different links MUST NOT share the same source and target activities; that
+is, at most one link may be used to connect two activities.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">68 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+An activity MAY declare itself to be the source of one or more links by
+including one or more <code>&lt;source&gt;</code> elements. Each <code>&lt;source&gt;</code>
+element MUST use a distinct link name.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">69 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+An activity MAY declare itself to be the target of one or more links by
+including one or more <code>&lt;target&gt;</code> elements. Each <code>&lt;target&gt;</code> element
+associated with a given activity MUST use a link name distinct from all other
+<code>&lt;target&gt;</code> elements at that activity.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">70 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+A link MUST NOT cross the boundary of a repeatable construct or the
+<code>&lt;compensationHandler&gt;</code> element. This means, a link used within a
+repeatable construct (<code>&lt;while&gt;</code>, <code>&lt;repeatUntil&gt;</code>, <code>&lt;forEach&gt;</code>,
+<code>&lt;eventHandlers&gt;</code>) or a <code>&lt;compensationHandler&gt;</code> MUST be declared in
+a <code>&lt;flow&gt;</code> that is itself nested inside the repeatable construct or
+<code>&lt;compensationHandler&gt;</code>.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">71 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+A link that crosses a <code>&lt;catch&gt;</code>, <code>&lt;catchAll&gt;</code> or
+<code>&lt;terminationHandler&gt;</code> element boundary MUST be outbound only, that is,
+it MUST have its source activity within the <code>&lt;faultHandlers&gt;</code> or
+<code>&lt;terminationHandler&gt;</code>, and its target activity outside of the scope
+associated with the handler.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">72 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+A <code>&lt;link&gt;</code> declared in a <code>&lt;flow&gt;</code> MUST NOT create a control cycle,
+that is, the source activity must not have the target activity as a logically
+preceding activity.<a rel="footnote" href="#fn-4" name="fnd-4"><sup>4</sup></a>
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">73 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+The expression for a join condition MUST be constructed using only Boolean
+operators and the activity's incoming links' status values.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">74 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+The expressions in <code>&lt;startCounterValue&gt;</code> and <code>&lt;finalCounterValue&gt;</code>
+MUST return a TII (meaning they contain at least one character) that can be
+validated as a <code>xsd:unsignedInt</code>. Static analysis MAY be used to detect
+this erroneous situation at design time when possible (for example, when the
+expression is a constant).
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">75 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+For the <code>&lt;forEach&gt;</code> activity, <code>&lt;branches&gt;</code> is an integer value
+expression. Static analysis MAY be used to detect if the integer value is
+larger than the number of directly enclosed activities of <code>&lt;forEach&gt;</code> at
+design time when possible (for example, when the branches expression is a
+constant).
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">76 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+For <code>&lt;forEach&gt;</code> the enclosed scope MUST NOT declare a variable with the
+same name as specified in the <code>counterName</code> attribute of
+<code>&lt;forEach&gt;</code>.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">77 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+The value of the <code>target</code> attribute on a <code>&lt;compensateScope&gt;</code>
+activity MUST refer to the name of an immediately enclosed <code>scope</code> of the
+<code>scope</code> containing the FCT-handler with the <code>&lt;compensateScope&gt;</code>
+activity. This includes immediately enclosed scopes of an event handler
+(<code>&lt;onEvent&gt;</code> or <code>&lt;onAlarm&gt;</code>) associated with the same <code>scope</code>.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">78 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+The <code>target</code> attribute of a <code>&lt;compensateScope&gt;</code> activity MUST refer
+to a <code>scope</code> or an <code>invoke</code> activity with a fault handler or
+compensation handler.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">79 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+The root <code>scope</code> inside a FCT-handler MUST not have a compensation
+handler.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">80 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+There MUST be at least one <code>&lt;catch&gt;</code> or <code>&lt;catchAll&gt;</code> element within
+a <code>&lt;faultHandlers&gt;</code> element.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">81 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+For the <code>&lt;catch&gt;</code> construct; to have a defined type associated with the
+fault variable, the <code>faultVariable</code> attribute MUST only be used if either
+the <code>faultMessageType</code> or <code>faultElement</code> attributes, but not both,
+accompany it. The <code>faultMessageType</code> and <code>faultElement</code> attributes
+MUST NOT be used unless accompanied by <code>faultVariable</code> attribute.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">82 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+The peer-scope dependency relation MUST NOT include cycles. In other words,
+<acronym title="Web Service Business Process Execution Language">WS-BPEL</acronym> forbids a process in which there are peer scopes S1 and S2
+such that S1 has a peer-scope dependency on S2 and S2 has a peer-scope
+dependency on S1.<a rel="footnote" href="#fn-5" name="fnd-5"><sup>5</sup></a>
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">83 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+An event handler MUST contain at least one <code>&lt;onEvent&gt;</code> or
+<code>&lt;onAlarm&gt;</code> element.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">84 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+The <code>partnerLink</code> reference of <code>&lt;onEvent&gt;</code> MUST resolve to a partner
+link declared in the process in the following order: the associated scope
+first and then the ancestor scopes.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">88 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+For <code>&lt;onEvent&gt;</code>, the resolution order of the <code>correlation set</code>(s)
+referenced by <code>&lt;correlation&gt;</code> MUST be first the associated scope and then
+the ancestor scopes.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">91 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+A scope with the <code>isolated</code> attribute set to <code>"yes"</code> is called an
+isolated scope. Isolated scopes MUST NOT contain other isolated scopes.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">92 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+Within a scope, the name of all named immediately enclosed scopes MUST be
+unique.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">93 </td><td valign="top" width="18%">static analysis </td><td valign="top" width="72%">
+Identical <code>&lt;catch&gt;</code> constructs MUST NOT exist within a
+<code>&lt;faultHandlers&gt;</code> element.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">100 </td><td valign="top" width="18%">notice </td><td valign="top" width="72%">
+Either a non-standard element<a rel="footnote" href="#fn-6" name="fnd-6"><sup>6</sup></a> was parsed
 or a <acronym>BPEL</acronym> activity was considered as
 misplaced. In the first case, a non-standard element was parsed when the
 parser expected a <acronym>BPEL</acronym> standard activity. Then, a syntax error is
 printed and the whole element is ignored. The parse error and this message
 can usually be ignored, as non-standard elements would neither we translated
-to a Petri net model nor are constrained by the <acronym>WS-BPEL</acronym>
+to a Petri net model nor are constrained by the <acronym title="Web Service Business Process Execution Language">WS-BPEL</acronym>
 specification.
 
 <p>In the second case, a syntactically correct <acronym>BPEL</acronym>
@@ -483,84 +807,107 @@ was skipped, because it was misplaced. As an example, consider two activities
 embedded in a <code>&lt;while&gt;</code> activity without an enclosing <code>&lt;sequence&gt;</code>
 activity. In this case, the second activity triggers this message.
 
-<p><br></td></tr><tr align="left"><td valign="top" width="10%">101 </td><td valign="top" width="15%">notice </td><td valign="top" width="75%">
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">101 </td><td valign="top" width="18%">notice </td><td valign="top" width="72%">
 The <code>&lt;partners&gt;</code> construct (only supported by <acronym>BPEL4WS</acronym> 1.1) is skipped due
 to a syntax error.
 
-<p><br></td></tr><tr align="left"><td valign="top" width="10%">102 </td><td valign="top" width="15%">notice </td><td valign="top" width="75%">
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">102 </td><td valign="top" width="18%">notice </td><td valign="top" width="72%">
 The <code>&lt;to&gt;</code> or <code>&lt;from&gt;</code> construct is skipped due to a syntax error.
 
-<p><br></td></tr><tr align="left"><td valign="top" width="10%">103 </td><td valign="top" width="15%">notice </td><td valign="top" width="75%">
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">103 </td><td valign="top" width="18%">notice </td><td valign="top" width="72%">
 The <code>&lt;condition&gt;</code> construct is skipped due to a syntax error.
 
-<p><br></td></tr><tr align="left"><td valign="top" width="10%">104 </td><td valign="top" width="15%">critical </td><td valign="top" width="75%">
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">104 </td><td valign="top" width="18%">critical </td><td valign="top" width="72%">
 When a syntax error occurs, BPEL2oWFN tries to recover and continues parsing the
 input file after skipping the faulty or unknown element. Sometimes, however,
 the skipping of activities yields to situations where a further analysis of the
 <acronym>BPEL</acronym> process is impossible. In this case, the syntax of the process
 has to be fixed or non-standard elements have to be removed or out-commented.
 
-<p><br></td></tr><tr align="left"><td valign="top" width="10%">105 </td><td valign="top" width="15%">notice </td><td valign="top" width="75%">
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">105 </td><td valign="top" width="18%">notice </td><td valign="top" width="72%">
 When a syntax error occurs, BPEL2oWFN tries to recover and continues parsing the
 input file after skipping the faulty or unknown element. If it is possible to
 continue, the analysis results might be faulty. In this case, the syntax of the
 process has to be fixed or non-standard elements have to be removed or
 out-commented.
 
-<p><br></td></tr><tr align="left"><td valign="top" width="10%">106 </td><td valign="top" width="15%">warning </td><td valign="top" width="75%">
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">106 </td><td valign="top" width="18%">warning </td><td valign="top" width="72%">
 <acronym title="control flow graph">CFG</acronym> analysis detected two receiving activities (i.e., <code>&lt;receive&gt;</code>,
 <code>&lt;onEvent&gt;</code>, <code>&lt;onMessage&gt;</code>, synchronous <code>&lt;invoke&gt;</code>) that might
 be activated concurrently and share the same partner link, port type, operation,
 and correlation set. When a message is sent to the process, these activities
 are in <i>conflict</i>; that is, it is not defined which activity will receive an
 inbound message. At runtime, the standard fault <span class="samp">bpel:conflictingReceive</span>
-would be thrown.
+would be thrown.<a rel="footnote" href="#fn-7" name="fnd-7"><sup>7</sup></a>
 
-<p><br></td></tr><tr align="left"><td valign="top" width="10%">107 </td><td valign="top" width="15%">warning </td><td valign="top" width="75%">
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">107 </td><td valign="top" width="18%">warning </td><td valign="top" width="72%">
 A mandatory attribute of an activity was not defined. Especially for
 communicating activities, the absence of <code>partnerLink</code> and
 <code>operation</code> might hamper the subsequent analysis and Petri net generation.
 
-<p><br></td></tr><tr align="left"><td valign="top" width="10%">108 </td><td valign="top" width="15%">syntax </td><td valign="top" width="75%">
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">108 </td><td valign="top" width="18%">syntax </td><td valign="top" width="72%">
 An attribute was set to a value that violates the attribute's given type. Only
 the types <code>tBoolean</code>, <code>tInitiate</code>, <code>tRoles</code>, and
 <code>tPattern</code> are checked.
 
-<p><br></td></tr><tr align="left"><td valign="top" width="10%">109 </td><td valign="top" width="15%">warning </td><td valign="top" width="75%">
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">109 </td><td valign="top" width="18%">warning </td><td valign="top" width="72%">
 A variable referenced in an activity was not defined before; that is, no
 matching <code>&lt;variable&gt;</code> definition was found in a parent scope.
 
-<p><br></td></tr><tr align="left"><td valign="top" width="10%">110 </td><td valign="top" width="15%">warning </td><td valign="top" width="75%">
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">110 </td><td valign="top" width="18%">warning </td><td valign="top" width="72%">
 A partner link referenced in an activity was not defined before; that is, no
 matching <code>&lt;partnerLink&gt;</code> definition was found in the process.
 
-<p><br></td></tr><tr align="left"><td valign="top" width="10%">111 </td><td valign="top" width="15%">warning </td><td valign="top" width="75%">
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">111 </td><td valign="top" width="18%">warning </td><td valign="top" width="72%">
 A correlation set referenced in an activity was not defined before; that is, no
 matching <code>&lt;correlationSet&gt;</code> definition was found in a parent scope.
 
-<p><br></td></tr><tr align="left"><td valign="top" width="10%">112 </td><td valign="top" width="15%">notice </td><td valign="top" width="75%">
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">112 </td><td valign="top" width="18%">notice </td><td valign="top" width="72%">
 The <code>&lt;literal&gt;</code> construct is skipped due to a syntax error.
 
-<p><br></td></tr><tr align="left"><td valign="top" width="10%">113 </td><td valign="top" width="15%">syntax </td><td valign="top" width="75%">
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">113 </td><td valign="top" width="18%">syntax </td><td valign="top" width="72%">
 A <acronym>UTF</acronym>-8 character was read in the input file. As BPEL2oWFN's scanner does not
 support Unicode, all <acronym>UTF</acronym>-8 characters are ignored. This message is only
 displayed when the first <acronym>UTF</acronym>-8 character is read.
 
-<p><br></td></tr><tr align="left"><td valign="top" width="10%">114 </td><td valign="top" width="15%">warning </td><td valign="top" width="75%">
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">114 </td><td valign="top" width="18%">warning </td><td valign="top" width="72%">
 <acronym title="control flow graph">CFG</acronym> analysis detected a read access to a variable that was not
 initialized before. At runtime, the standard fault
-<span class="samp">bpel:uninitializedVariable</span> would be thrown.
+<span class="samp">bpel:uninitializedVariable</span> would be thrown.<a rel="footnote" href="#fn-8" name="fnd-8"><sup>8</sup></a>
 
-<p><br></td></tr><tr align="left"><td valign="top" width="10%">115 </td><td valign="top" width="15%">notice </td><td valign="top" width="75%">
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">115 </td><td valign="top" width="18%">notice </td><td valign="top" width="72%">
 The process definition defines an abstract process profile, and thus allows
 several &ldquo;opaque&rdquo; constructs. When processing and analyzing an abstract
 process, BPEL2oWFN might report error messages that where designed for
 executable processes, for example missing attributes. Static analysis errors
 detected in an abstract process are reported as warnings.
 
-<p><br></td></tr><tr align="left"><td valign="top" width="10%">116 </td><td valign="top" width="15%">notice </td><td valign="top" width="75%">
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">116 </td><td valign="top" width="18%">notice </td><td valign="top" width="72%">
 An <code>&lt;opaqueActivity&gt;</code> of an abstract process was replaced by an
 <code>&lt;empty&gt;</code> activity.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">117 </td><td valign="top" width="18%">notice </td><td valign="top" width="72%">
+When using the parameter <span class="samp">communicationonly</span>, the occurrence of join
+failures is not modeled. Thus, any activity is treated as if the
+attribute <span class="samp">suppressJoinFailure</span> is set to <span class="samp">yes</span>.<a rel="footnote" href="#fn-9" name="fnd-9"><sup>9</sup></a>
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">118 </td><td valign="top" width="18%">notice </td><td valign="top" width="72%">
+A user-defined transition condition is ignored and modeled as &ldquo;<i>n</i>-out-of-<i>n</i>&rdquo;
+(<span class="samp">true</span>) instead.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">119 </td><td valign="top" width="18%">notice </td><td valign="top" width="72%">
+A user-defined transition condition is ignored and modeled as &ldquo;1-out-of-<i>n</i>&rdquo;
+(XOR) instead.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">120 </td><td valign="top" width="18%">notice </td><td valign="top" width="72%">
+When using the parameter <span class="samp">communicationonly</span>, the FTC (fault, termination,
+and compensation) handlers are not modeled.
+
+<p><br></td></tr><tr align="left"><td valign="top" width="5%">121 </td><td valign="top" width="18%">notice </td><td valign="top" width="72%">
+When using the parameter <span class="samp">communicationonly</span>, activities of the negative
+control flow (<code>&lt;exit&gt;</code>, <code>&lt;throw&gt;</code>, <code>&lt;compensate&gt;</code>, and
+<code>&lt;compensateScope&gt;</code>) are replaced by an <code>&lt;empty&gt;</code> activity.
+
 <br></td></tr></table>
 
 <!-- @section Exit Values -->
@@ -573,12 +920,12 @@ An <code>&lt;opaqueActivity&gt;</code> of an abstract process was replaced by an
 <div class="node">
 <p><hr>
 <a name="File-Formats"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#FAQ-and-Known-Bugs">FAQ and Known Bugs</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="#Invoking-BPEL2oWFN">Invoking BPEL2oWFN</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="#Warnings-and-Error-Messages">Warnings and Error Messages</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <br>
 </div>
 
-<h2 class="chapter">2 File Formats</h2>
+<h2 class="chapter">4 File Formats</h2>
 
 <p>In this chapter, we show how a <acronym>BPEL</acronym> process can be translated to a Petri net model an then exported to several output file formats. Consider the following simple <acronym>BPEL</acronym> process <span class="file">example.bpel</span>:
 
@@ -625,7 +972,7 @@ one structured activities), no handlers, no links and no variables. On the
 bottom the analysis results are summarized: no syntactic, static, or other
 error was found.
 
-<p>Furthermore, three &ldquo;implicit&rdquo; activities are counted: The <acronym>WS-BPEL</acronym>
+<p>Furthermore, three &ldquo;implicit&rdquo; activities are counted: The <acronym title="Web Service Business Process Execution Language">WS-BPEL</acronym>
 specification describes several implicit transformations of the input process,
 as well as standard fault, termination and compensation handlers. In the
 considered <acronym>BPEL</acronym> process, no fault handlers are specified. Thus, a
@@ -809,7 +1156,7 @@ analysis tools. In this case, we want to create a Fiona open workflow net execut
      
 </pre>
 <p>This is finally the <acronym>oWFN</acronym> model of the <acronym>BPEL</acronym> process that can be analyzed by
-Fiona<a rel="footnote" href="#fn-3" name="fnd-3"><sup>3</sup></a>.
+Fiona<a rel="footnote" href="#fn-10" name="fnd-10"><sup>10</sup></a>.
 
 <!--  -->
 <!--  -->
@@ -821,9 +1168,9 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <br>
 </div>
 
-<h2 class="chapter">3 FAQ and Known Bugs</h2>
+<h2 class="chapter">5 FAQ and Known Bugs</h2>
 
-<h3 class="section">3.1 Frequently Asked Questions</h3>
+<h3 class="section">5.1 Frequently Asked Questions</h3>
 
      <ul>
 <li><b>Why does the parser reject my <acronym>BPEL</acronym> file?</b>
@@ -836,7 +1183,7 @@ term generator Kimwitu++ to describe and process the
 <acronym title="abstract syntax tree">AST</acronym> (abstract syntax tree), and the trio Flex/Bison/Kimwitu++
 integrates seamlessly. Though the grammar has to be defined manually, the
 generated parser is very flexible as it allows to process <acronym>BPEL4WS</acronym> 1.1,
-<acronym>WS-BPEL</acronym> 2.0, and to some extend <acronym>BPEL4WS</acronym> 1.0 processes.
+<acronym title="Web Service Business Process Execution Language">WS-BPEL</acronym> 2.0, and to some extend <acronym>BPEL4WS</acronym> 1.0 processes.
 
      <p>However, the parser does not support <acronym title="Extensible Markup Lanuage">XML</acronym> namspaces. To
 this end, <acronym>BPEL</acronym> constructs are only recognized if the are either
@@ -851,11 +1198,11 @@ namespace prefixed from <acronym>BPEL</acronym> elements.
 BPEL2oWFN still reports syntax errors?</b>
 
      <p>Well, because there <i>are</i> such errors. Many <acronym>BPEL</acronym> editors generate
-invalid <acronym>BPEL</acronym>. Even the <acronym>WS-BPEL</acronym> specification contained
+invalid <acronym>BPEL</acronym>. Even the <acronym title="Web Service Business Process Execution Language">WS-BPEL</acronym> specification contained
 processes with syntax errors for a long time. Furthermore, a lot of syntax errors
 cannot be covered with <acronym title="XML Schema Definition">XSD</acronym> (XML Schema Definition) validation. Even if
 the considered process run on existing engines, BPEL2oWFN might reject it, as
-it stubbornly follows the <acronym>WS-BPEL</acronym> specification.
+it stubbornly follows the <acronym title="Web Service Business Process Execution Language">WS-BPEL</acronym> specification.
 
      <li><b>Why <acronym title="Low-Level Analyzer">LoLA</acronym> does not accept the generated files and reports parse
 errors in the first line?</b>
@@ -867,7 +1214,7 @@ tool like <span class="samp">dos2unix</span> or change the file format in an edi
 
 </ul>
 
-<h3 class="section">3.2 Known Bugs</h3>
+<h3 class="section">5.2 Known Bugs</h3>
 
 <p>Though this is the second major release version of BPEL2oWFN, it might
 still contain poorly tested, inefficient code.
@@ -891,7 +1238,7 @@ occurrence.
 
 <p><a name="Reporting-Bugs"></a>
 
-<h3 class="section">3.3 Reporting Bugs</h3>
+<h3 class="section">5.3 Reporting Bugs</h3>
 
 <p>If you find a bug in BPEL2oWFN or have a question, please first check that
 it is not a known bug or a frequently asked question listed in above. Otherwise,
@@ -903,7 +1250,7 @@ produced. We will try to answer your mail within a week.
 <p>If you have other questions, comments or suggestions about BPEL2oWFN,
 contact us via electronic mail to <a href="mailto:nlohmann@informatik.hu-berlin.de">nlohmann@informatik.hu-berlin.de</a>.
 
-<h3 class="section">3.4 Contact Person</h3>
+<h3 class="section">5.4 Contact Person</h3>
 
 <p>Niels Lohmann
 
@@ -924,7 +1271,7 @@ Unter den Linden 6<br>
      <dt>Fax<dd>(+49) (30) 2093-3067
 </dl>
 
-<h3 class="section">3.5 Help BPEL2oWFN</h3>
+<h3 class="section">5.5 Help BPEL2oWFN</h3>
 
 <p>BPEL2oWFN is now developed for one and a half year, and grown to a quite big
 program. Since November 2006, BPEL2oWFN is a GNU package, and the development
@@ -1358,13 +1705,31 @@ to permit their use in free software.
 <!-- End: -->
 <div class="footnote">
 <hr>
-<a name="texinfo-footnotes-in-document"></a><h4>Footnotes</h4><p class="footnote"><small>[<a name="fn-1" href="#fnd-1">1</a>]</small> Yasper is available at <a href="http://www.yasper.org">http://www.yasper.org</a>.</p>
+<a name="texinfo-footnotes-in-document"></a><h4>Footnotes</h4><p class="footnote"><small>[<a name="fn-1" href="#fnd-1">1</a>]</small> Fiona is available at <a href="http://www.informatik.hu-berlin.de/top/tools4bpel">http://www.informatik.hu-berlin.de/top/tools4bpel</a>.</p>
 
-<p class="footnote"><small>[<a name="fn-2" href="#fnd-2">2</a>]</small> All elements
-that are not explicitly defined in the <acronym>WS-BPEL</acronym> specification (e.g.,
+<p class="footnote"><small>[<a name="fn-2" href="#fnd-2">2</a>]</small> Yasper is available at <a href="http://www.yasper.org">http://www.yasper.org</a>.</p>
+
+<p class="footnote"><small>[<a name="fn-3" href="#fnd-3">3</a>]</small> The descriptions for
+static analysis messages are taken from Appendix B of the <acronym title="Web Service Business Process Execution Language">WS-BPEL</acronym>
+specification.</p>
+
+<p class="footnote"><small>[<a name="fn-4" href="#fnd-4">4</a>]</small> This fault can only be detected in mode mode <span class="samp">cfg</span>.</p>
+
+<p class="footnote"><small>[<a name="fn-5" href="#fnd-5">5</a>]</small> This fault can only be detected in mode mode <span class="samp">cfg</span>.</p>
+
+<p class="footnote"><small>[<a name="fn-6" href="#fnd-6">6</a>]</small> All elements
+that are not explicitly defined in the <acronym title="Web Service Business Process Execution Language">WS-BPEL</acronym> specification (e.g.,
 elements from other namespaces) are considered as &ldquo;non-standard&rdquo;.</p>
 
-<p class="footnote"><small>[<a name="fn-3" href="#fnd-3">3</a>]</small> Fiona is available at <a href="http://www.informatik.hu-berlin.de/top/tools4bpel">http://www.informatik.hu-berlin.de/top/tools4bpel</a>.</p>
+<p class="footnote"><small>[<a name="fn-7" href="#fnd-7">7</a>]</small> This fault can only be detected in mode mode <span class="samp">cfg</span>.</p>
+
+<p class="footnote"><small>[<a name="fn-8" href="#fnd-8">8</a>]</small> This fault can only be detected in mode mode <span class="samp">cfg</span>.</p>
+
+<p class="footnote"><small>[<a name="fn-9" href="#fnd-9">9</a>]</small> If the
+attribute <span class="samp">suppressJoinFailure</span> is not explicitly defined for an
+activity, the value is inherited by the parent activity.</p>
+
+<p class="footnote"><small>[<a name="fn-10" href="#fnd-10">10</a>]</small> Fiona is available at <a href="http://www.informatik.hu-berlin.de/top/tools4bpel">http://www.informatik.hu-berlin.de/top/tools4bpel</a>.</p>
 
 <p><hr></div>
 

@@ -3,8 +3,8 @@ GNU BPEL2oWFN
 
 About this document:
 
-   This manual is for GNU BPEL2oWFN, version 2.0.0, a tool translating
-a BPEL process into an open workflow net (oWFN), last updated 20 April
+   This manual is for GNU BPEL2oWFN, version 2.0.1, a tool translating
+a BPEL process into an open workflow net (oWFN), last updated 28 April
 2007.
 
    Copyright (C) 2005, 2006, 2007 Niels Lohmann
@@ -32,24 +32,86 @@ Table of Contents
 *****************
 
 GNU BPEL2oWFN
-1 Invoking BPEL2oWFN
-  1.1 Options
-    1.1.1 Modes
-    1.1.2 Additional parameters
-    1.1.3 Output formats
-  1.2 Examples
-  1.3 Warnings and Error Messages
-2 File Formats
-3 FAQ and Known Bugs
-  3.1 Frequently Asked Questions
-  3.2 Known Bugs
-  3.3 Reporting Bugs
-  3.4 Contact Person
-  3.5 Help BPEL2oWFN
+1 Introducing BPEL2oWFN
+  1.1 Concepts of BPEL2oWFN
+2 Invoking BPEL2oWFN
+  2.1 Options
+    2.1.1 Modes
+    2.1.2 Additional parameters
+    2.1.3 Output formats
+  2.2 Examples
+3 Warnings and Error Messages
+4 File Formats
+5 FAQ and Known Bugs
+  5.1 Frequently Asked Questions
+  5.2 Known Bugs
+  5.3 Reporting Bugs
+  5.4 Contact Person
+  5.5 Help BPEL2oWFN
 Appendix A GNU Free Documentation License
 
 
-1 Invoking BPEL2oWFN
+1 Introducing BPEL2oWFN
+***********************
+
+BPEL2oWFN translates a web service expressed in WS-BPEL (Web Service
+Business Process Execution Language) into an oWFN (open Workflow Net).
+This oWFN can be used to:
+
+   * check for controllability or generate the operating guideline
+     using the tool Fiona(1),
+
+   * check for deadlocks or any other Petri net property, or
+
+   * check any temporal logic formula with a variety of model checking
+     tools.
+
+BPEL2oWFN uses static analysis to make the generated Petri net model as
+compact as possible to analyze a chosen property. This is called
+flexible model generation.  Furthermore, several design flaws can be
+detected using control and data flow analysis.
+
+BPEL2oWFN was written by Niels Lohmann, Christian Gierds and Martin
+Znamirowski.  It is part of the Tools4BPEL project funded by the
+Bundesministerium für Bildung und Forschung. See
+`http://www.informatik.hu-berlin.de/top/tools4bpel' for details.
+
+1.1 Concepts of BPEL2oWFN
+=========================
+
+Input BPEL Process    BPEL2oWFN can read BPEL processes compliant to the
+                     WS-BPEL 2.0 or the BPEL4WS 1.1 specification.
+Abstract Syntax       The AST (abstract syntax tree) is the main data
+Tree                 structure of BPEL2oWFN.  The AST is annotated with
+                     information gained by static analysis.
+Control/Data Flow     From the abstract syntax tree, a control/data flow
+Graph                graph is built. This graph is used to apply static
+                     analysis algorithms to gain information (e.g., dead
+                     code) about the process. These algorithms
+                     Furthermore, design flaws such as cyclic control
+                     links or conflicting receiving activities are
+                     detected.
+Petri Net API         The annotated abstract syntax tree is used to
+                     generate a Petri net model of the BPEL process. All
+                     Petri net-related functions (adding, removing and
+                     merging of nodes; structural reduction) are
+                     provided by the Petri net API (application
+                     programming interface).
+Pattern Repository    For each BPEL construct, several patterns with
+                     different degrees of abstraction are stored in the
+                     pattern repository. Using the information gained by
+                     static analysis, the most abstract pattern
+                     applicable is used.
+Output Petri Net      The generated Petri net model can be exported to
+                     many file formats, such as PNML, LoLA, Fiona oWFN,
+                     INA, APNN, or PEP.
+
+---------- Footnotes ----------
+
+(1) Fiona is available at
+`http://www.informatik.hu-berlin.de/top/tools4bpel'.
+
+2 Invoking BPEL2oWFN
 ********************
 
 The standard invocation of BPEL2oWFN is:
@@ -64,7 +126,7 @@ BPEL2oWFN can be called without any parameter. In this case, it acts as
 a simple parser for BPEL processes that reads its input from the
 standard input (`stdin').
 
-1.1 Options
+2.1 Options
 ===========
 
 BPEL2oWFN supports the following command-line options:
@@ -133,7 +195,41 @@ BPEL2oWFN supports the following command-line options:
           Displays messages from Bison. Can be combined with any other
           debug level.
 
-1.1.1 Modes
+`--reduce=0-5'
+`-r 0-5'
+     Apply several structural reduction rules to the generated Petri
+     net model (implies mode `petrinet' or `consistency'). The rules
+     preserve deadlocks, livelocks and all deadlock-free communicating
+     partners. The rules are organized in reduction levels:
+
+    `0'
+          No rules are applied (standard).
+
+    `1'
+          Structural dead nodes are removed; that is, unmarked places
+          with empty preset and transitions with a dead place in its
+          preset are removed.
+
+    `2'
+          All reduction rules from `-r1'. Additionally, unnecessary
+          status places are removed. A status place is considered
+          unnecessary if it has no outgoing arcs.
+
+    `3'
+          All reduction rules from `-r2'. Additionally, identical nodes
+          are merged.  Two nodes are considered identical if their
+          presets and postsets are equal:
+
+    `4'
+          All reduction rules from `-r3'. Additionally, remove serial
+          nodes:
+
+    `5'
+          All reduction rules from `-r4'. Additionally, remove
+          self-loop nodes.
+
+
+2.1.1 Modes
 -----------
 
 When invoking BPEL2oWFN several modes are possible.
@@ -187,7 +283,7 @@ When invoking BPEL2oWFN several modes are possible.
      but no output is generated.
 
 
-1.1.2 Additional parameters
+2.1.2 Additional parameters
 ---------------------------
 
 These options control some Petri net-related options.
@@ -209,12 +305,13 @@ These options control some Petri net-related options.
           control flow (in activities in fault handlers), no further
           BPEL standard faults can occur.
 
+    `nointerface'
+          When creating a `.dot' file, no interface is printed.
+
     `reduce'
-          Apply several structural reduction rules to the generated
-          Petri net model. The rules preserve deadlocks, livelocks and
-          all deadlock-free communicating partners. In addition,
-          structurally dead nodes of the Petri net, for example,
-          unmarked places without ingoing arcs are removed.
+          Apply all implemented structural reduction rules. This
+          parameter is a shortcut for `-r5' and overrides any other
+          defined reduction level.
 
     `standardfaults'
           Model the occurrence of standard faults. When this parameter
@@ -235,7 +332,7 @@ These options control some Petri net-related options.
      `--parameter' to each parameter.
 
 
-1.1.3 Output formats
+2.1.3 Output formats
 --------------------
 
 Especially for the Petri net mode, a variaty of output formats are
@@ -336,7 +433,7 @@ supported. There are invoked by the following option:
                When the parameter `-o' is used, a file with the suffix
                `.xml' is created.
 
-1.2 Examples
+2.2 Examples
 ============
 
 In this section we show some examples how BPEL2oWFN can be invoked.
@@ -368,8 +465,12 @@ In this section we show some examples how BPEL2oWFN can be invoked.
      LoLA file `service1_service2.lola'. Furthermore, an analysis file
      `service1_service2.task' is written that can be processed by LoLA.
 
-1.3 Warnings and Error Messages
-===============================
+---------- Footnotes ----------
+
+(1) Yasper is available at `http://www.yasper.org'.
+
+3 Warnings and Error Messages
+*****************************
 
 BPEL2oWFN performs several analysis steps on the input BPEL process.
 These messages are displayed during parsing and postprocessing of the
@@ -413,105 +514,305 @@ down a few lines. After the line number, the error code is displayed.
 `W00114' stands for a warning with code 114. Further details can be
 taken from the table below.
 
-Code    Type        Description
---------------------------------------------------------------------------- 
-1-94    static       A check for a static analysis goal defined in the
-        analysis    WS-BPEL specification detected an error. Currently,
-                    44 of the 94 described static analysis goals are
-                    checked.
-100     notice       Either a non-standard element(2) was parsed or a
-                    BPEL activity was considered as misplaced. In the
-                    first case, a non-standard element was parsed when the
-                    parser expected a BPEL standard activity. Then, a
-                    syntax error is printed and the whole element is
-                    ignored. The parse error and this message can usually
-                    be ignored, as non-standard elements would neither we
-                    translated to a Petri net model nor are constrained
-                    by the WS-BPEL specification.
-                    
-                    In the second case, a syntactically correct BPEL was
-                    skipped, because it was misplaced. As an example,
-                    consider two activities embedded in a `<while>'
-                    activity without an enclosing `<sequence>' activity.
-                    In this case, the second activity triggers this
-                    message.
-101     notice       The `<partners>' construct (only supported by
-                    BPEL4WS 1.1) is skipped due to a syntax error.
-102     notice       The `<to>' or `<from>' construct is skipped due to a
-                    syntax error.
-103     notice       The `<condition>' construct is skipped due to a
-                    syntax error.
-104     critical     When a syntax error occurs, BPEL2oWFN tries to
-                    recover and continues parsing the input file after
-                    skipping the faulty or unknown element. Sometimes,
-                    however, the skipping of activities yields to
-                    situations where a further analysis of the BPEL
-                    process is impossible. In this case, the syntax of
-                    the process has to be fixed or non-standard elements
-                    have to be removed or out-commented.
-105     notice       When a syntax error occurs, BPEL2oWFN tries to
-                    recover and continues parsing the input file after
-                    skipping the faulty or unknown element. If it is
-                    possible to continue, the analysis results might be
-                    faulty. In this case, the syntax of the process has
-                    to be fixed or non-standard elements have to be
-                    removed or out-commented.
-106     warning      CFG analysis detected two receiving activities
-                    (i.e., `<receive>', `<onEvent>', `<onMessage>',
-                    synchronous `<invoke>') that might be activated
-                    concurrently and share the same partner link, port
-                    type, operation, and correlation set. When a message
-                    is sent to the process, these activities are in
-                    conflict; that is, it is not defined which activity
-                    will receive an inbound message. At runtime, the
-                    standard fault `bpel:conflictingReceive' would be
-                    thrown.
-107     warning      A mandatory attribute of an activity was not
-                    defined. Especially for communicating activities, the
-                    absence of `partnerLink' and `operation' might hamper
-                    the subsequent analysis and Petri net generation.
-108     syntax       An attribute was set to a value that violates the
-                    attribute's given type. Only the types `tBoolean',
-                    `tInitiate', `tRoles', and `tPattern' are checked.
-109     warning      A variable referenced in an activity was not defined
-                    before; that is, no matching `<variable>' definition
-                    was found in a parent scope.
-110     warning      A partner link referenced in an activity was not
-                    defined before; that is, no matching `<partnerLink>'
-                    definition was found in the process.
-111     warning      A correlation set referenced in an activity was not
-                    defined before; that is, no matching
-                    `<correlationSet>' definition was found in a parent
-                    scope.
-112     notice       The `<literal>' construct is skipped due to a syntax
-                    error.
-113     syntax       A UTF-8 character was read in the input file. As
-                    BPEL2oWFN's scanner does not support Unicode, all
-                    UTF-8 characters are ignored. This message is only
-                    displayed when the first UTF-8 character is read.
-114     warning      CFG analysis detected a read access to a variable
-                    that was not initialized before. At runtime, the
-                    standard fault `bpel:uninitializedVariable' would be
-                    thrown.
-115     notice       The process definition defines an abstract process
-                    profile, and thus allows several "opaque" constructs.
-                    When processing and analyzing an abstract process,
-                    BPEL2oWFN might report error messages that where
-                    designed for executable processes, for example
-                    missing attributes. Static analysis errors detected
-                    in an abstract process are reported as warnings.
-116     notice       An `<opaqueActivity>' of an abstract process was
-                    replaced by an `<empty>' activity.
+Code Type          Description
+------------------------------------------------------------------------ 
+6    static         The `<rethrow>' activity MUST only be used within
+     analysis      a faultHandler (i.e.  `<catch>' and `<catchAll>'
+                   elements).(1)
+7    static         The `<compensateScope>' activity MUST only be used
+     analysis      from within a `faultHandler', another
+                   `compensationHandler', or a `terminationHandler'.
+8    static         The `<compensate>' activity MUST only be used from
+     analysis      within a `faultHandler', another
+                   `compensationHandler', or a `terminationHandler'.
+15   static         To be instantiated, an executable business process
+     analysis      MUST contain at least one `<receive>' or `<pick>'
+                   activity annotated with a `createInstance="yes"'
+                   attribute.
+16   static         A `partnerLink' MUST specify the `myRole' or the
+     analysis      `partnerRole', or both.
+17   static         The `initializePartnerRole' attribute MUST NOT be
+     analysis      used on a partnerLink that does not have a partner
+                   role.
+18   static         The name of a `partnerLink' MUST be unique among
+     analysis      the names of all partnerLinks defined within the
+                   same immediately enclosing scope.
+23   static         The name of a variable MUST be unique among the
+     analysis      names of all variables defined within the same
+                   immediately enclosing scope.
+24   static         Variable names are `BPELVariableNames', that is,
+     analysis      NCNames (as defined in XML Schema specification)
+                   but in addition they MUST NOT contain the `.'
+                   character.
+25   static         The `messageType', type or `element' attributes
+     analysis      are used to specify the type of a variable. Exactly
+                   one of these attributes MUST be used.
+44   static         The name of a `<correlationSet>' MUST be unique
+     analysis      among the names of all `<correlationSet>' defined
+                   within the same immediately enclosing scope.
+51   static         The `inputVariable' attribute MUST NOT be used on
+     analysis      an `Invoke' activity that contains `<toPart>'
+                   elements.
+52   static         The `outputVariable' attribute MUST NOT be used on
+     analysis      an `Invoke' activity that contains `<toPart>'
+                   elements.
+55   static         For `<receive>', if `<fromPart>' elements are used
+     analysis      on a `<receive>' activity then the variable
+                   attribute MUST NOT be used on the same activity.
+56   static         A "start activity" is a `<receive>' or `<pick>'
+     analysis      activity that is annotated with a
+                   `createInstance="yes"' attribute. Activities other
+                   than the following: start activities, `<scope>',
+                   `<flow>' and `<sequence>' MUST NOT be performed
+                   prior to or simultaneously with start activities.
+57   static         If a process has multiple start activities with
+     analysis      correlation sets then all such activities MUST
+                   share at least one common correlationSet and all
+                   common correlationSets defined on all the
+                   activities MUST have the value of the `initiate'
+                   attribute be set to `"join"'.
+59   static         For `<reply>', if `<toPart>' elements are used on
+     analysis      a `<reply>' activity then the `variable' attribute
+                   MUST NOT be used on the same activity.
+62   static         If `<pick>' has a `createInstance' attribute with
+     analysis      a value of `yes', the events in the `<pick>' MUST
+                   all be `<onMessage>' events.
+63   static         The semantics of the `<onMessage>' event are
+     analysis      identical to a `<receive>' activity regarding the
+                   optional nature of the `variable' attribute or
+                   `<fromPart>' elements, if `<fromPart>' elements on
+                   an activity then the variable attribute MUST NOT be
+                   used on the same activity (see SA00055).
+64   static         For `<flow>', a declared link's name MUST be
+     analysis      unique among all `<link>' names defined within the
+                   same immediately enclosing `<flow>'.
+65   static         The value of the `linkName' attribute of
+     analysis      `<source>' or `<target>' MUST be the name of a
+                   `<link>' declared in an enclosing `<flow>' activity.
+66   static         Every link declared within a `<flow>' activity
+     analysis      MUST have exactly one activity within the `<flow>'
+                   as its source and exactly one activity within the
+                   `<flow>' as its target.
+67   static         Two different links MUST NOT share the same source
+     analysis      and target activities; that is, at most one link
+                   may be used to connect two activities.
+68   static         An activity MAY declare itself to be the source of
+     analysis      one or more links by including one or more
+                   `<source>' elements. Each `<source>' element MUST
+                   use a distinct link name.
+69   static         An activity MAY declare itself to be the target of
+     analysis      one or more links by including one or more
+                   `<target>' elements. Each `<target>' element
+                   associated with a given activity MUST use a link
+                   name distinct from all other `<target>' elements at
+                   that activity.
+70   static         A link MUST NOT cross the boundary of a repeatable
+     analysis      construct or the `<compensationHandler>' element.
+                   This means, a link used within a repeatable
+                   construct (`<while>', `<repeatUntil>', `<forEach>',
+                   `<eventHandlers>') or a `<compensationHandler>'
+                   MUST be declared in a `<flow>' that is itself
+                   nested inside the repeatable construct or
+                   `<compensationHandler>'.
+71   static         A link that crosses a `<catch>', `<catchAll>' or
+     analysis      `<terminationHandler>' element boundary MUST be
+                   outbound only, that is, it MUST have its source
+                   activity within the `<faultHandlers>' or
+                   `<terminationHandler>', and its target activity
+                   outside of the scope associated with the handler.
+72   static         A `<link>' declared in a `<flow>' MUST NOT create
+     analysis      a control cycle, that is, the source activity must
+                   not have the target activity as a logically
+                   preceding activity.(2)
+73   static         The expression for a join condition MUST be
+     analysis      constructed using only Boolean operators and the
+                   activity's incoming links' status values.
+74   static         The expressions in `<startCounterValue>' and
+     analysis      `<finalCounterValue>' MUST return a TII (meaning
+                   they contain at least one character) that can be
+                   validated as a `xsd:unsignedInt'. Static analysis
+                   MAY be used to detect this erroneous situation at
+                   design time when possible (for example, when the
+                   expression is a constant).
+75   static         For the `<forEach>' activity, `<branches>' is an
+     analysis      integer value expression. Static analysis MAY be
+                   used to detect if the integer value is larger than
+                   the number of directly enclosed activities of
+                   `<forEach>' at design time when possible (for
+                   example, when the branches expression is a
+                   constant).
+76   static         For `<forEach>' the enclosed scope MUST NOT
+     analysis      declare a variable with the same name as specified
+                   in the `counterName' attribute of `<forEach>'.
+77   static         The value of the `target' attribute on a
+     analysis      `<compensateScope>' activity MUST refer to the name
+                   of an immediately enclosed `scope' of the `scope'
+                   containing the FCT-handler with the
+                   `<compensateScope>' activity. This includes
+                   immediately enclosed scopes of an event handler
+                   (`<onEvent>' or `<onAlarm>') associated with the
+                   same `scope'.
+78   static         The `target' attribute of a `<compensateScope>'
+     analysis      activity MUST refer to a `scope' or an `invoke'
+                   activity with a fault handler or compensation
+                   handler.
+79   static         The root `scope' inside a FCT-handler MUST not
+     analysis      have a compensation handler.
+80   static         There MUST be at least one `<catch>' or
+     analysis      `<catchAll>' element within a `<faultHandlers>'
+                   element.
+81   static         For the `<catch>' construct; to have a defined
+     analysis      type associated with the fault variable, the
+                   `faultVariable' attribute MUST only be used if
+                   either the `faultMessageType' or `faultElement'
+                   attributes, but not both, accompany it. The
+                   `faultMessageType' and `faultElement' attributes
+                   MUST NOT be used unless accompanied by
+                   `faultVariable' attribute.
+82   static         The peer-scope dependency relation MUST NOT
+     analysis      include cycles. In other words, WS-BPEL forbids a
+                   process in which there are peer scopes S1 and S2
+                   such that S1 has a peer-scope dependency on S2 and
+                   S2 has a peer-scope dependency on S1.(3)
+83   static         An event handler MUST contain at least one
+     analysis      `<onEvent>' or `<onAlarm>' element.
+84   static         The `partnerLink' reference of `<onEvent>' MUST
+     analysis      resolve to a partner link declared in the process
+                   in the following order: the associated scope first
+                   and then the ancestor scopes.
+88   static         For `<onEvent>', the resolution order of the
+     analysis      `correlation set'(s) referenced by `<correlation>'
+                   MUST be first the associated scope and then the
+                   ancestor scopes.
+91   static         A scope with the `isolated' attribute set to
+     analysis      `"yes"' is called an isolated scope. Isolated
+                   scopes MUST NOT contain other isolated scopes.
+92   static         Within a scope, the name of all named immediately
+     analysis      enclosed scopes MUST be unique.
+93   static         Identical `<catch>' constructs MUST NOT exist
+     analysis      within a `<faultHandlers>' element.
+100  notice         Either a non-standard element(4) was parsed or a
+                   BPEL activity was considered as misplaced. In the
+                   first case, a non-standard element was parsed when
+                   the parser expected a BPEL standard activity. Then,
+                   a syntax error is printed and the whole element is
+                   ignored. The parse error and this message can
+                   usually be ignored, as non-standard elements would
+                   neither we translated to a Petri net model nor are
+                   constrained by the WS-BPEL specification.
+                   
+                   In the second case, a syntactically correct BPEL
+                   was skipped, because it was misplaced. As an
+                   example, consider two activities embedded in a
+                   `<while>' activity without an enclosing `<sequence>'
+                   activity. In this case, the second activity
+                   triggers this message.
+101  notice         The `<partners>' construct (only supported by
+                   BPEL4WS 1.1) is skipped due to a syntax error.
+102  notice         The `<to>' or `<from>' construct is skipped due to
+                   a syntax error.
+103  notice         The `<condition>' construct is skipped due to a
+                   syntax error.
+104  critical       When a syntax error occurs, BPEL2oWFN tries to
+                   recover and continues parsing the input file after
+                   skipping the faulty or unknown element. Sometimes,
+                   however, the skipping of activities yields to
+                   situations where a further analysis of the BPEL
+                   process is impossible. In this case, the syntax of
+                   the process has to be fixed or non-standard
+                   elements have to be removed or out-commented.
+105  notice         When a syntax error occurs, BPEL2oWFN tries to
+                   recover and continues parsing the input file after
+                   skipping the faulty or unknown element. If it is
+                   possible to continue, the analysis results might be
+                   faulty. In this case, the syntax of the process has
+                   to be fixed or non-standard elements have to be
+                   removed or out-commented.
+106  warning        CFG analysis detected two receiving activities
+                   (i.e., `<receive>', `<onEvent>', `<onMessage>',
+                   synchronous `<invoke>') that might be activated
+                   concurrently and share the same partner link, port
+                   type, operation, and correlation set. When a
+                   message is sent to the process, these activities
+                   are in conflict; that is, it is not defined which
+                   activity will receive an inbound message. At
+                   runtime, the standard fault
+                   `bpel:conflictingReceive' would be thrown.(5)
+107  warning        A mandatory attribute of an activity was not
+                   defined. Especially for communicating activities,
+                   the absence of `partnerLink' and `operation' might
+                   hamper the subsequent analysis and Petri net
+                   generation.
+108  syntax         An attribute was set to a value that violates the
+                   attribute's given type. Only the types `tBoolean',
+                   `tInitiate', `tRoles', and `tPattern' are checked.
+109  warning        A variable referenced in an activity was not
+                   defined before; that is, no matching `<variable>'
+                   definition was found in a parent scope.
+110  warning        A partner link referenced in an activity was not
+                   defined before; that is, no matching
+                   `<partnerLink>' definition was found in the process.
+111  warning        A correlation set referenced in an activity was
+                   not defined before; that is, no matching
+                   `<correlationSet>' definition was found in a parent
+                   scope.
+112  notice         The `<literal>' construct is skipped due to a
+                   syntax error.
+113  syntax         A UTF-8 character was read in the input file. As
+                   BPEL2oWFN's scanner does not support Unicode, all
+                   UTF-8 characters are ignored. This message is only
+                   displayed when the first UTF-8 character is read.
+114  warning        CFG analysis detected a read access to a variable
+                   that was not initialized before. At runtime, the
+                   standard fault `bpel:uninitializedVariable' would
+                   be thrown.(6)
+115  notice         The process definition defines an abstract process
+                   profile, and thus allows several "opaque"
+                   constructs. When processing and analyzing an
+                   abstract process, BPEL2oWFN might report error
+                   messages that where designed for executable
+                   processes, for example missing attributes. Static
+                   analysis errors detected in an abstract process are
+                   reported as warnings.
+116  notice         An `<opaqueActivity>' of an abstract process was
+                   replaced by an `<empty>' activity.
+117  notice         When using the parameter `communicationonly', the
+                   occurrence of join failures is not modeled. Thus,
+                   any activity is treated as if the attribute
+                   `suppressJoinFailure' is set to `yes'.(7)
+118  notice         A user-defined transition condition is ignored and
+                   modeled as "n-out-of-n" (`true') instead.
+119  notice         A user-defined transition condition is ignored and
+                   modeled as "1-out-of-n" (XOR) instead.
+120  notice         When using the parameter `communicationonly', the
+                   FTC (fault, termination, and compensation) handlers
+                   are not modeled.
+121  notice         When using the parameter `communicationonly',
+                   activities of the negative control flow (`<exit>',
+                   `<throw>', `<compensate>', and `<compensateScope>')
+                   are replaced by an `<empty>' activity.
 
 ---------- Footnotes ----------
 
-(1) Yasper is available at `http://www.yasper.org'.
+(1) The descriptions for static analysis messages are taken from
+Appendix B of the WS-BPEL specification.
 
-(2) All elements that are not explicitly defined in the WS-BPEL
+(2) This fault can only be detected in mode mode `cfg'.
+
+(3) This fault can only be detected in mode mode `cfg'.
+
+(4) All elements that are not explicitly defined in the WS-BPEL
 specification (e.g., elements from other namespaces) are considered as
 "non-standard".
 
-2 File Formats
+(5) This fault can only be detected in mode mode `cfg'.
+
+(6) This fault can only be detected in mode mode `cfg'.
+
+(7) If the attribute `suppressJoinFailure' is not explicitly defined
+for an activity, the value is inherited by the parent activity.
+
+4 File Formats
 **************
 
 In this chapter, we show how a BPEL process can be translated to a
@@ -749,10 +1050,10 @@ by Fiona(1).
 (1) Fiona is available at
 `http://www.informatik.hu-berlin.de/top/tools4bpel'.
 
-3 FAQ and Known Bugs
+5 FAQ and Known Bugs
 ********************
 
-3.1 Frequently Asked Questions
+5.1 Frequently Asked Questions
 ==============================
 
    * Why does the parser reject my BPEL file?
@@ -799,7 +1100,7 @@ by Fiona(1).
      editor like `vi'.
 
 
-3.2 Known Bugs
+5.2 Known Bugs
 ==============
 
 Though this is the second major release version of BPEL2oWFN, it might
@@ -821,7 +1122,7 @@ still contain poorly tested, inefficient code.
      `outputVariable' to distinguish the respective asynchronous and
      synchronous occurrence.
 
-3.3 Reporting Bugs
+5.3 Reporting Bugs
 ==================
 
 If you find a bug in BPEL2oWFN or have a question, please first check
@@ -835,7 +1136,7 @@ within a week.
 If you have other questions, comments or suggestions about BPEL2oWFN,
 contact us via electronic mail to <nlohmann@informatik.hu-berlin.de>.
 
-3.4 Contact Person
+5.4 Contact Person
 ==================
 
 Niels Lohmann
@@ -860,7 +1161,7 @@ Phone
 Fax
      (+49) (30) 2093-3067
 
-3.5 Help BPEL2oWFN
+5.5 Help BPEL2oWFN
 ==================
 
 BPEL2oWFN is now developed for one and a half year, and grown to a
