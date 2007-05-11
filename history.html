@@ -30,7 +30,7 @@
 		<img src="ressource/gerwinski-gnu-head.png" width="62" height="62" class="style1"><img border="0" src="ressource/bpel2owfn.png" width="300" height="62" alt="BPEL2oWFN" /></td>
 		<td align="right" valign="bottom">Translating BPEL Process to Open Workflow 
 		Nets<br />
-		GNU BPEL2oWFN Version 2.0.0, 20 April 2007</td>
+		GNU BPEL2oWFN Version 2.0.1, 11 May 2007</td>
 	</tr>
 </table>
 <div class="navigation">
@@ -49,16 +49,29 @@
 <area href="#1.0" shape="polygon" coords="9, 186, 9, 112, 70, 8, 102, 25, 48, 119, 47, 185">
 <area href="#1.1" shape="polygon" coords="59, 186, 59, 115, 123, 5, 155, 19, 101, 115, 100, 186">
 <area href="#1.2" shape="polygon" coords="150, 186, 150, 108, 199, 27, 228, 42, 188, 110, 188, 186">
-<area href="#2.0.0" shape="polygon" coords="366, 186, 366, 114, 421, 26, 464, 48, 420, 119, 421, 186">
+<area href="#2.0.0" shape="polygon" coords="332, 186, 332, 114, 387, 26, 430, 48, 386, 119, 387, 186">
+<area href="#2.0.1" shape="polygon" coords="437, 186, 439, 118, 475, 52, 441, 35, 390, 118, 389, 186">
 </map>
 <img alt="version history" src="ressource/history.png" width="500" height="187" usemap="#FPMap0" class="style3"></p>
-<h3><a name="2.0.1"></a>Version 2.0.1 (not yet officially released - work in 
-progress)</h3>
+<h3><a name="2.0.1"></a>Version 2.0.1 (11 May 2007)</h3>
 <blockquote>
 	<h4>fixed bugs:</h4>
 	<ul>
 		<li>&lt;if&gt;/&lt;switch&gt; pattern did not work with parameter 
 		&quot;communicationonly&quot;</li>
+		<li>&lt;flow&gt; activities in repeated constructs (&lt;while&gt;, &lt;repeatUntil&gt;, 
+		...) could result in unbounded nets</li>
+		<li>parameter &quot;xor&quot; could crash</li>
+	</ul>
+	<h4>miscellaneous:</h4>
+	<ul>
+		<li>new parameter &quot;nointerface&quot; allows to create dot output of the 
+		generated Petri net model without drawing the interface</li>
+		<li>transitions of the Petri net model are labeled and colored according to their role (only 
+		for dot mode)</li>
+		<li>Petri net reduction rules can be chosen using the &quot;reduce&quot; option</li>
+		<li>improved performance of composition of nets in the &quot;consistency&quot; 
+		mode</li>
 	</ul>
 </blockquote>
 <h3><a name="2.0.0"></a>Version 2.0.0 (20 April 2007)</h3>
@@ -206,7 +219,7 @@ progress)</h3>
 		188, Humboldt-Universität zu Berlin, July 2005. [<a href="http://www2.informatik.hu-berlin.de/Institut/struktur/systemanalyse/preprint/stahl188.pdf">PDF</a>]</li>
 	</ul>
 	<dl>
-		<dd>last changes: 22.04.2007</dd>
+		<dd>last changes: 26.04.2007</dd>
 	</dl>
 </blockquote>
 
